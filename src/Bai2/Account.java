@@ -51,20 +51,18 @@ public class Account {
         return "Account{" +
                 "stk=" + stk +
                 ", tentk='" + tentk + '\'' +
-                ", tien=" + tienf +
+                ", tien=" + tienf+
                 '}';
     }
 
-    public double naptien(double tiennap){
-        return this.tien + tiennap;
+    public void naptien(double tiennap){
+         this.tien = this.tien + tiennap;
     }
-    public double rutTien(double tienRut) {
+    public void rutTien(double tienRut) {
         int phiRutTien =2000;
         this.tien= this.tien - (tienRut+phiRutTien);
-        return this.tien;
     }
-    public double daoHan() {
+    public void daoHan() {
         this.tien = this.tien +this.tien* laisuat;
-        return this.tien;
     }
 }

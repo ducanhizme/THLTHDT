@@ -22,18 +22,18 @@ public class QuanLyNganHang {
     public void addMoney(String tentaikhoan){
         System.out.println("Nhâp số tiền muốn nạp: ");
         double tiennap  = new Scanner(System.in).nextDouble();
-        int i =0;
-        for(Account info : ds){
-            if(ds.get(i).getTentk().equalsIgnoreCase(tentaikhoan)){
-                        ds.get(i).naptien(tiennap);
+        if(tiennap >0){
+            int i =0;
+            for(Account info : ds){
+                if(ds.get(i).getTentk().equalsIgnoreCase(tentaikhoan)){
+                    ds.get(i).naptien(tiennap);
+                }
+                i++;
             }
-            i++;
         }
     }
 
-    public void minusMoney(String tentaikhoan){
-        System.out.println("Nhập số tiền bạn muốn rút: ");
-        double tienrut = new Scanner(System.in).nextDouble();
+    public void minusMoney(String tentaikhoan,double tienrut){
         int i =0;
         for(Account info : ds){
             if(ds.get(i).getTentk().equalsIgnoreCase(tentaikhoan)){
@@ -46,10 +46,21 @@ public class QuanLyNganHang {
     public void transferMoney(){
         System.out.println("Nhâp tài khoản muốn chuyển tiền: ");
         Long taikhoanchuyentien = new Scanner(System.in).nextLong();
-        int vitrichuyentien = ds.indexOf(taikhoanchuyentien);
+        int i =0;
+        int vitrichuyentien=0;
+        for(Account info: ds){
+            if(ds.get(i).getStk()==taikhoanchuyentien){
+                vitrichuyentien =i;
+            }
+        }
         System.out.println("Nhập vào tài khoản muốn nhận tiền: ");
         Long taikhoannhantien = new Scanner(System.in).nextLong();
-        int vitrinhantien = ds.indexOf(taikhoannhantien);
+        int vitrinhantien = 0;
+        for(Account info: ds){
+            if(ds.get(i).getStk()==taikhoanchuyentien){
+                vitrinhantien =i;
+            }
+        }
         System.out.println("Nhập vào số tiền bạn muốn chuyển: ");
         double tienchuyen = new Scanner(System.in).nextDouble();
         if(ds.get(vitrichuyentien).getTien()==tienchuyen){
