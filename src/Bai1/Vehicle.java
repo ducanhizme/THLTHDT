@@ -3,8 +3,10 @@ package Bai1;
 public class Vehicle {
     private int giaTri;
     private int dungtich;
+    public Vehicle(){
+
+    }
     public Vehicle(int giaTri, int dungtich) {
-        super();
         this.giaTri = giaTri;
         this.dungtich = dungtich;
     }
@@ -20,12 +22,8 @@ public class Vehicle {
     public void setDungtich(int dungtich) {
         this.dungtich = dungtich;
     }
-    @Override
-    public String toString() {
-        return "Vehicle [giaTri=" + giaTri + ", dungtich=" + dungtich + "]";
-    }
-    public double  tinhThue() {
-        double thue=0;
+    public float tinhThue() {
+        float thue=0;
         if(this.dungtich < 100) {
             thue = this.giaTri*1/100;
         }else if(this.dungtich >= 100 && this.dungtich <=200) {
@@ -34,6 +32,13 @@ public class Vehicle {
             thue = this.giaTri * 5/100;
         }
         return thue;
+    }
 
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "giaTri=" + giaTri +
+                ", dungtich=" + dungtich +
+                '}'+tinhThue();
     }
 }
