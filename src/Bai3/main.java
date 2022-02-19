@@ -36,7 +36,7 @@ public class main {
         System.out.println("Thuong phan so la:");
         psThuong.display();
 
-        sc.close();
+
     }
 }
 
