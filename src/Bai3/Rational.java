@@ -2,15 +2,15 @@ package Bai3;
 
 import java.util.Scanner;
 
-public class Fraction {
+public class Rational {
     private int tuSo;
     private int mauSo;
 
-    public Fraction() {
+    public Rational() {
         tuSo = 0;
         mauSo = 1;
     }
-    public Fraction(int tuSo, int mauSo) {
+    public Rational(int tuSo, int mauSo) {
         if (mauSo == 0) {
             System.out.println("Mau so khong duoc bang 0");
             tuSo = 0;
@@ -20,13 +20,13 @@ public class Fraction {
             this.mauSo = mauSo;
         }
     }
-    public void enterFrac(Scanner sc) {
+    public void enter() {
         int ts, ms;
         do {
             System.out.print("\tNhap vao tu so: ");
-            ts = sc.nextInt();
+            ts = new Scanner(System.in).nextInt();
             System.out.print("\tNhap vao mau so: ");
-            ms = sc.nextInt();
+            ms = new Scanner(System.in).nextInt();
 
             if (ms == 0) {
                 System.out.println("Nhap lai thong tin cho phan so!");
@@ -35,8 +35,6 @@ public class Fraction {
         tuSo = ts;
         mauSo = ms;
     }
-
-    // Ham hien thi phan so
     public void display() {
         if (tuSo * mauSo < 0) {
             System.out.println("-" + Math.abs(tuSo) + "/" + Math.abs(mauSo));
@@ -45,52 +43,44 @@ public class Fraction {
         }
     }
 
-    // Ham cong 2 phan so
-    public Fraction add(Fraction ps2) {
+    public Rational add(Rational ps2) {
         int ts = tuSo * ps2.mauSo + ps2.tuSo * mauSo;
         int ms = mauSo * ps2.mauSo;
-        return new Fraction(ts, ms);
+        return new Rational(ts, ms);
     }
 
-    // Ham tru 2 phan so
-    public Fraction sub(Fraction ps2) {
+    public Rational sub(Rational ps2) {
         int ts = tuSo * ps2.mauSo - ps2.tuSo * mauSo;
         int ms = mauSo * ps2.mauSo;
-        return new Fraction(ts, ms);
+        return new Rational(ts, ms);
     }
 
-    // Ham nhan 2 phan so
-    public Fraction mul(Fraction ps2) {
+    public Rational mul(Rational ps2) {
         int ts = tuSo * ps2.tuSo;
         int ms = mauSo * ps2.mauSo;
-        return new Fraction(ts, ms);
+        return new Rational(ts, ms);
     }
 
-    // Ham nghich dao phan so
-    public void inverse() {
-        int tg = tuSo;
-        tuSo = mauSo;
-        mauSo = tg;
+    public void inverse(Rational ps) {
+        int tg = ps.tuSo;
+        ps.tuSo = ps.mauSo;
+        ps.mauSo = tg;
+        ps.display();
     }
 
-    // Chia 2 phan so
-    public Fraction div(Fraction ps2) {
-        // Nghich dao ps2
+
+    public Rational div(Rational ps2) {
         int tg = ps2.tuSo;
         ps2.tuSo = ps2.mauSo;
         ps2.mauSo = tg;
-
-        // Nhan this vs ps2 (da nghich dao)
         int ts = tuSo * ps2.tuSo;
         int ms = mauSo * ps2.mauSo;
-        return new Fraction(ts, ms);
+        return new Rational(ts, ms);
     }
 
-    // Ham toi gian phan so
-    public void reduce() {
-        // Tim uscln
-        int a = tuSo;
-        int b = mauSo;
+    public void reduce(Rational ps) {
+        int a = ps.tuSo;
+        int b = ps.mauSo;
         int r = a % b;
         while (r != 0) {
             a = b;
@@ -98,10 +88,20 @@ public class Fraction {
             r = a % b;
         }
 
-        // Toi gian phan so
-        tuSo /= b;
-        mauSo /= b;
+        ps.tuSo /= b;
+        ps.mauSo /= b;
+
+        ps.display();
+
     }
+
+    public Rational CompareRational(Rational ps1, Rational ps2) {
+        int a= ps1.tuSo;
+        int b = ps1.mauSo;
+        int c = ps2.tuSo;
+        int  d = ps2.mauSo;
+        int e = a*d-b*c;
+        return (e>0) ? ps1 : ps2;
+    }
+
 }
-
-
