@@ -15,20 +15,32 @@ public class QuanLy {
         System.out.println("-----Menu-----");
         System.out.println("1.Giảng Viên");
         System.out.println("2.Sinh viên");
-        System.out.println("3.EXIT");
-        System.out.println("Nhập vào lựa chọn của bạn");
-        int chon = new Scanner(System.in).nextInt();
+        System.out.println("0.EXIT");
+        int chon;
         do{
+            System.out.println("Nhập vào lựa chọn của bạn");
+             chon = new Scanner(System.in).nextInt();
             switch(chon){
                 case 1:
-                    GiangVien gv = new GiangVien();
-                    gv.nhap();
-                    this.listNguoi.add(gv);
+                    System.out.println("Nhập vào số giảng viên muốn xét khen thưởng");
+                    int n = new Scanner(System.in).nextInt();
+                    for (int i = 0; i <n ; i++) {
+                        GiangVien gv = new GiangVien();
+                        gv.nhap();
+                        this.listNguoi.add(gv);
+                    }
                     break;
                 case 2:
-                    SinhVien sv = new SinhVien();
-                    sv.nhap();
-                    this.listNguoi.add(sv);
+                    System.out.println("Nhập vào số sinh viên muốn xét khen thưởng");
+                    int m = new Scanner(System.in).nextInt();
+                    for (int i = 0; i < m ; i++) {
+                        SinhVien sv = new SinhVien();
+                        sv.nhap();
+                        this.listNguoi.add(sv);
+                    }
+                    break;
+                case 0:
+                    System.out.println("Cảm ơn bạn đã nhập");
                     break;
                 default:
                     System.out.println("Không có trong menu");
@@ -39,12 +51,42 @@ public class QuanLy {
     public void printAllList(){
         this.listNguoi.forEach(System.out::println);//nếu bạn không hiểu thì viết thành hàm riêng của bạn cũng được
     }
+    public void xuatTungThongTin(){
+        System.out.println("-----Menu-----");
+        System.out.println("1.In ra thông tin giảng viên");
+        System.out.println("2.In ra thông tin sinh viên");
+        System.out.println("0.EXIT");
+        int chon;
+        do{
+            System.out.println("Nhập vào lựa chọn của bạn");
+            chon = new Scanner(System.in).nextInt();
+            switch(chon){
+                case 1:
+                    List<GiangVien> k = listGiangVien();
+                    for(GiangVien e : k){
+                        System.out.println(e);
+                    }
+
+                case 2:
+                   List<SinhVien> c = listSinhVien();
+                    for(SinhVien e : c){
+                        System.out.println(e);
+                    }
+                    break;
+                case 0:
+                    System.out.println("------------");
+                    break;
+                default:
+                    System.out.println("Không có trong menu");
+            }
+        }while(chon!=0);
+    }
+
     // đây 2 hàm in ra và return về 2 list giảng viên và sinh viên để in ra thông tin những sinh viên, giảng viên được khen thưởng
     public List<GiangVien> listGiangVien(){
         List<GiangVien> listTemp = new ArrayList<>();
         for(Nguoi e : this.listNguoi){
             if(e instanceof GiangVien){
-                System.out.println(e.toString());
                 listTemp.add((GiangVien) e);
             }
         }
@@ -55,7 +97,6 @@ public class QuanLy {
         List<SinhVien> listTemp = new ArrayList<>();
         for(Nguoi e : this.listNguoi){
             if(e instanceof SinhVien){
-                System.out.println(e.toString());
                 listTemp.add((SinhVien) e);
             }
         }
@@ -66,7 +107,8 @@ public class QuanLy {
         List<SinhVien> lsv = listSinhVien();
         for(SinhVien e: lsv){
             if(e.checkKhenThuong()== true){
-                System.out.println(e.toString());
+                System.out.println(e.checkKhenThuong());
+                System.out.println(e);
             }
         }
     }
@@ -75,12 +117,17 @@ public class QuanLy {
         List<GiangVien> lgv = listGiangVien();
         for(GiangVien e: lgv){
             if(e.checkKhenThuong()== true){
-                System.out.println(e.toString());
+                System.out.println(e.checkKhenThuong());
+                System.out.println(e);
             }
         }
     }
-
+    // Stream api
     public Nguoi findByName(String name) {
+        System.out.println("---Menu---");
+        System.out.println("1.Sinh Viên");
+        System.out.println("2.Giảng Viên");
+        this.type = new Scanner(System.in).nextInt();
         return this.listNguoi.stream().filter(e -> {
             if(this.type ==1){
                 if(e instanceof SinhVien){
