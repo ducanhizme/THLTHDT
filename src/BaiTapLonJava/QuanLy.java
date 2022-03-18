@@ -47,9 +47,9 @@ public class QuanLy {
             }
         }while(chon!=0);
     }
-    // Đây là câu lệnh in ra hết các thông tin bằng cách sử dụng method referance của lambda
+
     public void printAllList(){
-        this.listNguoi.forEach(System.out::println);//nếu bạn không hiểu thì viết thành hàm riêng của bạn cũng được
+        this.listNguoi.forEach(System.out::println);
     }
     public void xuatTungThongTin(){
         System.out.println("-----Menu-----");
@@ -82,7 +82,6 @@ public class QuanLy {
         }while(chon!=0);
     }
 
-    // đây 2 hàm in ra và return về 2 list giảng viên và sinh viên để in ra thông tin những sinh viên, giảng viên được khen thưởng
     public List<GiangVien> listGiangVien(){
         List<GiangVien> listTemp = new ArrayList<>();
         for(Nguoi e : this.listNguoi){
@@ -122,7 +121,7 @@ public class QuanLy {
             }
         }
     }
-    // Stream api
+
     public Nguoi findByName(String name) {
         System.out.println("---Menu---");
         System.out.println("1.Sinh Viên");
@@ -169,9 +168,185 @@ public class QuanLy {
             }
         });
     }
-    //// TODO: 17/03/2022 Còn phần đọc file và class có chứa hàm main còn lại thì bạn làm nốt nhé 
-    /// // TODO: 17/03/2022 những hàm nào mà bạn test được thì feedback lại tôi hoặc 2 chúng mình cùng sửa 
-    //// TODO: 17/03/2022  nếu bạn không hiểu phần nào thì cứ comment lại để tôi sửa nhé
+
+    public void editSinhVien(){
+        List<SinhVien> lsv = listSinhVien();
+        lsv.forEach(System.out::println);
+        System.out.println("Nhập thứ tự của sinh viên bạn muốn sửa: ");
+        int chon = new Scanner(System.in).nextInt();
+        System.out.println("-----Menu----");
+        System.out.println("1.Sửa tên");
+        System.out.println("2.Sửa địa chỉ ");
+        System.out.println("3.Sửa tuổi\n" +
+                "4Sửa giới tính \n" +
+                "5.Sửa số điện thoại\n" +
+                "6.Sửa mã sinh viên \n" +
+                "7.Sửa lớp hành chính\n" +
+                "8.Sửa gpa \n" +
+                "9.Sửa điểm rèn luyện\n" +
+                "0.Exit");
+        int chonSua;
+        do {
+             System.out.println("Bạn muốn sửa: ");
+             chonSua = new Scanner(System.in).nextInt();
+             switch(chonSua){
+                 case 1:
+                     System.out.println("Nhập tên bạn muốn sửa: ");
+                     String name = new Scanner(System.in).nextLine();
+                     lsv.get(chon).setHoTen(name);
+                     break;
+                 case 2:
+                     System.out.println("Nhập địa chỉ bạn muốn sửa: ");
+                     String diaChi = new Scanner(System.in).nextLine();
+                     lsv.get(chon).setDiaChi(diaChi);
+                     break;
+                 case 3:
+                     System.out.println("Nhập tuổi bạn muốn sửa: ");
+                     int tuoi = new Scanner(System.in).nextInt();
+                     lsv.get(chon).setTuoi(tuoi);
+                     break;
+                 case 4:
+                     System.out.println("Nhập giới tính bạn muốn sửa: ");
+                     int  tf = new Scanner(System.in).nextInt();
+                     boolean check=false;
+                     if(tf == 1 )
+                         check = true;
+                     else if(tf ==0)
+                        check = false;
+                     lsv.get(chon).setGioiTinh(check);
+                     break;
+                 case 5:
+                     System.out.println("Nhập số điện thoại muốn sửa: ");
+                     String soDT = new Scanner(System.in).nextLine();
+                     lsv.get(chon).setSoDT(soDT);
+                     break;
+                 case 6:
+                     System.out.println("Nhập mã sinh viên muốn sửa: ");
+                     String maSV = new Scanner(System.in).nextLine();
+                     lsv.get(chon).setMaSinhVien(maSV);
+                     break;
+                 case 7:
+                     System.out.println("Nhập lớp hành chính muốn sửa: ");
+                     String lopHC = new Scanner(System.in).nextLine();
+                     lsv.get(chon).setLopHC(lopHC);
+                     break;
+                 case 8:
+                     System.out.println("Nhập điểm gpa muốn sửa: ");
+                     double qpa = new Scanner(System.in).nextDouble();
+                     lsv.get(chon).setGpa(qpa);
+                     break;
+                 case 9:
+                     System.out.println("Nhập điểm chuyên cần muốn sửa: ");
+                      double diem = new Scanner(System.in).nextDouble();
+                     lsv.get(chon).setDiemrenluyen(diem);
+                     break;
+                 case 0:
+                     System.out.println("Cảm ơn");
+                     break;
+                 default:
+                     System.out.println("Không có trong menu");
+             }
+
+        } while (chonSua!=0);
+    }
+
+    public void editGiangVien(){
+        List<GiangVien> lgv = listGiangVien();
+        lgv.forEach(System.out::println);
+        System.out.println("Nhập thứ tự của giảng viên bạn muốn sửa: ");
+        int chon = new Scanner(System.in).nextInt();
+        System.out.println("-----Menu----");
+        System.out.println("1.Sửa tên");
+        System.out.println("2.Sửa địa chỉ ");
+        System.out.println("3.Sửa tuổi\n" +
+                "4Sửa giới tính \n" +
+                "5.Sửa số điện thoại\n" +
+                "6.Sửa mã giảng viên \n" +
+                "7.Sửa bộ môn phụ trách\n" +
+                "8.Sửa học vị\n" +
+                "9.Sửa số lượng công trình\n" +
+                "10.Sửa số lượng lớp phụ trách\n"+
+                "0.Exit");
+        int chonSua;
+        do {
+            System.out.println("Bạn muốn sửa: ");
+            chonSua = new Scanner(System.in).nextInt();
+            switch(chonSua){
+                case 1:
+                    System.out.println("Nhập tên bạn muốn sửa: ");
+                    String name = new Scanner(System.in).nextLine();
+                    lgv.get(chon).setHoTen(name);
+                    break;
+                case 2:
+                    System.out.println("Nhập địa chỉ bạn muốn sửa: ");
+                    String diaChi = new Scanner(System.in).nextLine();
+                    lgv.get(chon).setDiaChi(diaChi);
+                    break;
+                case 3:
+                    System.out.println("Nhập tuổi bạn muốn sửa: ");
+                    int tuoi = new Scanner(System.in).nextInt();
+                    lgv.get(chon).setTuoi(tuoi);
+                    break;
+                case 4:
+                    System.out.println("Nhập giới tính bạn muốn sửa: ");
+                    int  tf = new Scanner(System.in).nextInt();
+                    boolean check=false;
+                    if(tf == 1 )
+                        check = true;
+                    else if(tf ==0)
+                        check = false;
+                    lgv.get(chon).setGioiTinh(check);
+                    break;
+                case 5:
+                    System.out.println("Nhập số điện thoại muốn sửa: ");
+                    String soDT = new Scanner(System.in).nextLine();
+                    lgv.get(chon).setSoDT(soDT);
+                    break;
+                case 6:
+                    System.out.println("Nhập mã giảng viên muốn sửa: ");
+                    String magv = new Scanner(System.in).nextLine();
+                    lgv.get(chon).setMaGiaoVien(magv);
+                    break;
+                case 7:
+                    System.out.println("Nhập bộ môn phụ trách muốn sửa: ");
+                    String mon = new Scanner(System.in).nextLine();
+                    lgv.get(chon).setBoMonPhuTrach(mon);
+                    break;
+                case 8:
+                    System.out.println("Nhập học vị muốn sửa: ");
+                    String hv = new Scanner(System.in).nextLine();
+                    lgv.get(chon).setHocVi(hv);
+                    break;
+                case 9:
+                    System.out.println("Nhập số lượng công trình muốn sửa: ");
+                    int  sl = new Scanner(System.in).nextInt();
+                    lgv.get(chon).setSoLuongCongTrinh(sl);
+                    break;
+                case 10:
+                    System.out.println("Nhập số lượng lớp phụ trách: ");
+                    int sll = new Scanner(System.in).nextInt();
+                    lgv.get(chon).setSoLuongLopPhuTrach(sll);
+                case 0:
+                    System.out.println("Cảm ơn");
+                    break;
+                default:
+                    System.out.println("Không có trong menu");
+            }
+
+        } while (chonSua!=0);
+    }
+
+    public void xoa(){
+        System.out.println("Nhâp vào tên người bạn muốn xóa và SDT");
+        System.out.print("Họ và tên:  ");
+        String name = new Scanner(System.in).nextLine();
+        System.out.print("SDT: ");
+        String sdt = new Scanner(System.in).nextLine();
+        for(Nguoi e : listNguoi){
+            if(e.getHoTen().equalsIgnoreCase(name) && e.getSoDT().equalsIgnoreCase(sdt))
+                this.listNguoi.remove(e);
+        }
+    }
 
 
 
