@@ -92,6 +92,6 @@ public class Nguoi implements Serializable {
             this.gioiTinh = false;
         }
         System.out.println("Nhâp vào số điện thoại: ");
-        this.diaChi = new Scanner(System.in).nextLine();
+        this.soDT = new Scanner(System.in).nextLine();
     }
 }
