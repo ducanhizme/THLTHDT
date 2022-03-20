@@ -1,10 +1,10 @@
 package BaiTapLonJava;
 
+import java.io.*;
 import java.util.*;
 
 public class QuanLy {
     private List<Nguoi> listNguoi;
-    private boolean checkGiangVien;
     private int type;
 
     public QuanLy(){
@@ -66,7 +66,7 @@ public class QuanLy {
                     for(GiangVien e : k){
                         System.out.println(e);
                     }
-
+                    break;
                 case 2:
                    List<SinhVien> c = listSinhVien();
                     for(SinhVien e : c){
@@ -102,24 +102,28 @@ public class QuanLy {
         return listTemp;
     }
 
-    public void printKhenThuongSinhVien(){
+    public List<SinhVien> printKhenThuongSinhVien(){
         List<SinhVien> lsv = listSinhVien();
+        List<SinhVien> svkt = new ArrayList<>();
         for(SinhVien e: lsv){
             if(e.checkKhenThuong()== true){
-                System.out.println(e.checkKhenThuong());
                 System.out.println(e);
+                svkt.add(e);
             }
         }
+        return svkt;
     }
 
-    public void printKhenThuongGiangVien(){
+    public List<GiangVien> printKhenThuongGiangVien(){
         List<GiangVien> lgv = listGiangVien();
+        List<GiangVien> gvkt = new ArrayList<>();
         for(GiangVien e: lgv){
             if(e.checkKhenThuong()== true){
-                System.out.println(e.checkKhenThuong());
                 System.out.println(e);
+                gvkt.add(e);
             }
         }
+        return gvkt;
     }
 
     public Nguoi findByName(String name) {
@@ -348,6 +352,84 @@ public class QuanLy {
         }
     }
 
+    public void luuFile(String path) throws FileNotFoundException, IOException {
+
+        File f;
+        f = new File(path);
+        FileOutputStream fout= new FileOutputStream(f);
+        ObjectOutputStream objout = new ObjectOutputStream(fout);
+        System.out.println("---Menu---\n"+"1.Lưu thông tin toàn bộ giảng viên sinh viên\n "+"2.Lưu thông tin giảng viên được khen thưởng" +
+                "3.Lưu thông tin sinh viên được khen thưởng" +
+                "0.Exit");
+        int choice;
+        do {
+            System.out.println("Nhập lựa chọn của bạn: ");
+            choice = new Scanner(System.in).nextInt();
+            switch(choice){
+                case 1:
+                    objout.writeObject(listNguoi);
+                    objout.close();
+                    fout.close();
+                    break;
+                case 2:
+                    objout.writeObject(printKhenThuongGiangVien());
+                    objout.close();
+                    fout.close();
+                    break;
+                case 3:
+                    objout.writeObject(printKhenThuongSinhVien());
+                    objout.close();
+                    fout.close();
+                    break;
+                case 0:
+                    System.out.println("Cảm ơn bạn đã nhập (file đã nhập"+path+" )");
+                default:
+                    System.out.println("Lưa chọn không có trong menu");
+            }
+        } while (choice !=0);
+    }
+
+    public void docFile(String path) throws FileNotFoundException, IOException, ClassNotFoundException{
+        File f = new File(path);
+        FileInputStream fin = new FileInputStream(f);
+        ObjectInputStream objin = new ObjectInputStream(fin);
+        int choice;
+        do {
+            System.out.println("---Menu---\n"+"1.Đọc thông tin toàn bộ giảng viên sinh viên\n "+"2.Đọc thông tin giảng viên được khen thưởng" +
+                    "3.Đọc thông tin sinh viên được khen thưởng" +
+                    "0.Exit");
+            System.out.println("Nhập vào kiểu"+path +"đã lưu: ");
+            choice =new Scanner(System.in).nextInt();
+            switch (choice){
+                case 1:
+                    listNguoi = new ArrayList<Nguoi>();
+                    listNguoi = (ArrayList)objin.readObject();
+                    objin.close();
+                    fin.close();
+                    break;
+                case 2:
+                    List<GiangVien> lkt= printKhenThuongGiangVien();
+                    lkt = new ArrayList<>();
+                    lkt = (ArrayList)objin.readObject();
+                    objin.close();
+                    fin.close();
+                    break;
+                case 3:
+                    List<SinhVien> lsvkt= printKhenThuongSinhVien();
+                    lsvkt = new ArrayList<>();
+                    lsvkt = (ArrayList)objin.readObject();
+                    objin.close();
+                    fin.close();
+                    break;
+                case 0:
+                    System.out.println("Cảm ơn bạn đã nhâp");
+                default:
+                    System.out.println("Không có trong menu");
+            }
+        } while (choice !=0);
+    }
+    //// TODO: 21/03/2022  hàm xóa chỉnh sửa đọc file đang bi sai (Đức anh sửa) 
+    //// TODO: 21/03/2022  hàm toString dũng sửa  
 
 
 }
