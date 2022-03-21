@@ -18,7 +18,7 @@ public class QuanLy {
         System.out.println("0.EXIT");
         int chon;
         do{
-            System.out.println("Nhập vào lựa chọn của bạn");
+            System.out.println("Nhập vào lựa chọn muốn nhập: ");
              chon = new Scanner(System.in).nextInt();
             switch(chon){
                 case 1:
@@ -252,6 +252,7 @@ public class QuanLy {
              }
 
         } while (chonSua!=0);
+        lsv.forEach(e->e.toString());
     }
 
     public void editGiangVien(){
@@ -338,6 +339,7 @@ public class QuanLy {
             }
 
         } while (chonSua!=0);
+        lgv.forEach(e->e.toString());
     }
 
     public void xoa(){
@@ -428,8 +430,4 @@ public class QuanLy {
             }
         } while (choice !=0);
     }
-    //// TODO: 21/03/2022  hàm xóa chỉnh sửa đọc file đang bi sai (Đức anh sửa) 
-    //// TODO: 21/03/2022  hàm toString dũng sửa  
-
-
 }

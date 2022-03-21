@@ -50,14 +50,13 @@ public class SinhVien extends Nguoi implements KhenThuong {
         this.diemrenluyen = diemrenluyen;
     }
 
-    //// TODO: 17/03/2022 Format lại toString để in ra thông tin ( Không phải hiện hàm hiện nữa )
     @Override
     public String toString() {
-        return "SinhVien{" +
-                "maSinhVien='" + maSinhVien + '\'' +
-                ", lopHC='" + lopHC + '\'' +
-                ", gpa=" + gpa +'\''+ ", diemrenluyen="+diemrenluyen+
-                "} " + super.toString();
+        return super.toString()+ "Sinh Viên-------------\n" +
+                "Mã sinh viên: "+maSinhVien+"\n" +
+                "Lớp hành chính: "+lopHC+"\n" +
+                "GPA: "+gpa+"\n" +
+                "Điểm rèn luyện: "+diemrenluyen+"\n";
     }
 
     @Override

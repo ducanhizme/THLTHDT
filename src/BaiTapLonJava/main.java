@@ -16,18 +16,24 @@ public class main {
                 "7.Chỉnh sửa giảng viên\n" +
                 "8.Xóa thông tin\n" +
                 "9.Ghi file\n" +
-                "10.Đọc file");
+                "10.Đọc file\n" +
+                "0.EXIT");
+        System.out.println("----------------------------------------------");
     }
-
+    public static void drawLine(){
+        System.out.println("-----------------------------------------------");
+    }
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         QuanLy ql = new QuanLy();
         String path = "";
+        menu();
         while (true) {
             System.out.println("Nhập lựa chọn của bạn: ");
             int choice = new Scanner(System.in).nextInt();
             switch (choice) {
                 case 1:
                     ql.input();
+                    drawLine();
                     break;
                 case 2:
                     System.out.println("In ra:\n" +
@@ -38,7 +44,7 @@ public class main {
                             "0.EXIT");
                     int luaChon;
                     do {
-                        System.out.println("Nhập lựa chọn của bạn");
+                        System.out.println("Nhập lựa chọn in ra ");
                         luaChon = new Scanner(System.in).nextInt();
                         switch (luaChon) {
                             case 1:
@@ -55,31 +61,39 @@ public class main {
                                 break;
                             case 0:
                                 System.out.println("Cảm ơn bạn đã nhâp ");
+                                break;
                             default:
                                 System.out.println("Không có trong menu");
                         }
                     } while (luaChon != 0);
+                    drawLine();
                     break;
 
                 case 3:
                     System.out.println("Nhập tên bạn muốn tìm kiếm: ");
                     String name = new Scanner(System.in).nextLine();
                     System.out.println(ql.findByName(name));
+                    drawLine();
                     break;
                 case 4:
                     ql.sortGiangVienKhenThuong();
+                    drawLine();
                     break;
                 case 5:
                     ql.sortSinhVienKhenThuong();
+                    drawLine();
                     break;
                 case 6:
                     ql.editSinhVien();
+                    drawLine();
                     break;
                 case 7:
                     ql.editGiangVien();
+                    drawLine();
                     break;
                 case 8:
                     ql.xoa();
+                    drawLine();
                     break;
                 case 9:
                     System.out.println("Nhập tên file bạn muốn lưu: ");
