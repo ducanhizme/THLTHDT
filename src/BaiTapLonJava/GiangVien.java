@@ -65,12 +65,12 @@ public class GiangVien extends Nguoi implements KhenThuong {
     //// TODO: 17/03/2022 Format lại toString để in ra thông tin ( Không phải hiện hàm hiện nữa )
     @Override
     public String toString() {
-        return super.toString()+"Giảng Viên ---------------\n" +
-                "Mã giảng viên: "+maGiaoVien+"\n" +
-                "Bộ môn phụ trách: "+boMonPhuTrach+"\n"+
-                "Học vị: "+hocVi +"\n" +
-                "Số lượng công trình: "+soLuongCongTrinh+"\n" +
-                "Số lớp phụ trách: "+soLuongLopPhuTrach+"\n";
+        return super.toString() +" Chức vụ : Giảng viên \t"+
+                "Mã giảng viên: "+maGiaoVien+"\t" +
+                "Bộ môn phụ trách: "+boMonPhuTrach+"\t"+
+                "Học vị: "+hocVi +"\t\t" +
+                "Số lượng công trình: "+soLuongCongTrinh+"\t\t" +
+                "Số lớp phụ trách: "+soLuongLopPhuTrach+"\t";
     }
 
     @Override

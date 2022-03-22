@@ -72,7 +72,7 @@ public class main {
                 case 3:
                     System.out.println("Nhập tên bạn muốn tìm kiếm: ");
                     String name = new Scanner(System.in).nextLine();
-                    System.out.println(ql.findByName(name));
+                    ql.findByName(name);
                     drawLine();
                     break;
                 case 4:
@@ -106,8 +106,10 @@ public class main {
                     break;
                 case 0:
                     System.out.println("Cảm ơn bạn đã nhập");
+                    break;
                 default:
                     System.out.println("Lựa chọn không có trong menu");
+                    break;
 
             }
 

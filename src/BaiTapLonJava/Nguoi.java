@@ -69,12 +69,12 @@ public class Nguoi implements Serializable {
             temp = "Nam";
         else if (this.gioiTinh == false)
             temp = "Nữ";
-        return "-----------------------\n" +
-                "Họ và tên: "+hoTen+"\n" +
-                "Địa chỉ: "+diaChi+"\n" +
-                "Tuổi: "+tuoi+"\n" +
-                "Giới tính: "+temp +"\n" +
-                "SDT: "+soDT +"\n";
+        return "\n" +
+                "Họ và tên: "+hoTen+"\t\t" +
+                "Địa chỉ: "+diaChi+"\t\t" +
+                "Tuổi: "+tuoi+"\t" +
+                "Giới tính: "+temp +"\t" +
+                "SDT: "+soDT +"\t\t";
     }
 
     public void nhap(){

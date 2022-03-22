@@ -13,6 +13,7 @@ public class QuanLy {
     public QuanLy(){
         this.listNguoi = new ArrayList<>();
         this.lgvKT = new ArrayList<GiangVien>();
+        this.lsvKT = new ArrayList<SinhVien>();
 
     }
 
@@ -58,7 +59,9 @@ public class QuanLy {
     }
 
     public void printAllList(){
-        this.listNguoi.forEach(System.out::println);
+        for(Nguoi nguoi : listNguoi){
+            System.out.println(nguoi);
+        }
     }
     public void xuatTungThongTin(){
         System.out.println("-----Menu-----");
@@ -66,48 +69,106 @@ public class QuanLy {
         System.out.println("2.In ra thông tin sinh viên");
         System.out.println("Nhập vào lựa chọn của bạn");
         int chon = new Scanner(System.in).nextInt();
-        System.out.println(xuatTungThongTin(chon));
+
+//        System.out.println(xuatTungThongTin(chon));
+        switch(chon){
+            case 1:{
+                for(Nguoi nguoi : listNguoi){
+                    if(nguoi instanceof GiangVien)
+                        System.out.println(nguoi);
+                }
+                break;
+            }
+            case 2:{
+                for(Nguoi nguoi : listNguoi){
+                    if(nguoi instanceof SinhVien)
+                        System.out.println(nguoi);
+                }
+                break;
+            }
+        }
     }
 
-    public List<Nguoi> xuatTungThongTin(int type){
-        return this.listNguoi.stream().filter(e->{
-            if(type ==2)
-                return e instanceof SinhVien;
-            if(type == 1)
-                return e instanceof GiangVien;
-            return false;
-        }).collect(Collectors.toList());
+//    public List<Nguoi> xuatTungThongTin(int type){
+//        return this.listNguoi.stream().filter(e->{
+//            if(type ==2)
+//                return e instanceof SinhVien;
+//            if(type == 1)
+//                return e instanceof GiangVien;
+//            return false;
+//        }).collect(Collectors.toList());
+//    }
+
+
+    public void printKhenThuongSinhVien(){
+//        this.lsvKT.forEach(System.out::println);
+        for(SinhVien sv : lsvKT){
+            System.out.println(sv);
+        }
     }
 
-    public void printKhenThuongSinhVien(){this.lsvKT.forEach(System.out::println);}
+    public void printKhenThuongGiangVien(){
+//        this.lgvKT.forEach(System.out::println);
+        for(GiangVien gv : lgvKT){
+            System.out.println(gv);
+        }
+    }
 
-    public void printKhenThuongGiangVien(){this.lgvKT.forEach(System.out::println);}
-
-    public Nguoi findByName(String name) {
+    public void findByName(String name) {
         System.out.println("---Menu---");
         System.out.println("1.Sinh Viên");
         System.out.println("2.Giảng Viên");
-        this.type = new Scanner(System.in).nextInt();
-        return this.listNguoi.stream().filter(e -> {
-            if(this.type ==1){
-                if(e instanceof SinhVien){
-                    if(e.getHoTen().equalsIgnoreCase(name)){
-                        return true;
+        System.out.println("0.Exit");
+        do {
+            this.type = new Scanner(System.in).nextInt();
+            switch(this.type){
+                case 1 : {
+                    for(Nguoi nguoi : listNguoi){
+                        if(nguoi instanceof SinhVien){
+                            if(nguoi.getHoTen().equalsIgnoreCase(name)){
+                                System.out.println("Thông tin sinh viên cần tìm là : ");
+                                System.out.println(nguoi);
+                            }
+                        }
                     }
-                    return false;
+                }
+                case 2 : {
+                    for(Nguoi nguoi : listNguoi){
+                        if(nguoi instanceof GiangVien){
+                            if(nguoi.getHoTen().equalsIgnoreCase(name)){
+                                System.out.println("Thông tin giảng viên cần tìm là : ");
+                                System.out.println(nguoi);
+                            }
+                        }
+                    }
+                }
+                default:{
+                    System.out.println("Không có trong menu, hãy nhập lại ");
+                    break;
                 }
             }
-            if(this.type ==2) {
-                if (e instanceof GiangVien) {
-                    if (e.getHoTen().equalsIgnoreCase(name)) {
-                        return true;
-                    }
-                    return false;
-                }
-            }
-            return false;
+        }while (this.type!=0);
 
-        }).findFirst().orElse(null);
+//        return this.listNguoi.stream().filter(e -> {
+//            if(this.type ==1){
+//                if(e instanceof SinhVien){
+//                    if(e.getHoTen().equalsIgnoreCase(name)){
+//                        return true;
+//                    }
+//                    return false;
+//                }
+//            }
+//            if(this.type ==2) {
+//                if (e instanceof GiangVien) {
+//                    if (e.getHoTen().equalsIgnoreCase(name)) {
+//                        return true;
+//                    }
+//                    return false;
+//                }
+//            }
+//            return false;
+//
+//        }).findFirst().orElse(null);
     }
 
     public void sortSinhVienKhenThuong(){

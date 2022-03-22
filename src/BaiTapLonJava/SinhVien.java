@@ -53,16 +53,16 @@ public class SinhVien extends Nguoi implements KhenThuong {
 
     @Override
     public String toString() {
-        return super.toString()+ "Sinh Viên-------------\n" +
-                "Mã sinh viên: "+maSinhVien+"\n" +
-                "Lớp hành chính: "+lopHC+"\n" +
-                "GPA: "+gpa+"\n" +
-                "Điểm rèn luyện: "+diemrenluyen+"\n";
+        return super.toString()+" Chức vụ : Sinh viên \t" +
+                "Mã sinh viên: "+maSinhVien+"\t\t" +
+                "Lớp hành chính: "+lopHC+"\t\t" +
+                "GPA: "+gpa+"\t" +
+                "Điểm rèn luyện: "+diemrenluyen+"\t";
     }
 
     @Override
     public boolean checkKhenThuong() {
-        if(this.gpa >=3.2&&this.diemrenluyen>8)
+        if(this.gpa >=3.2&&this.diemrenluyen>7)
             return true;
         else
             return false;
