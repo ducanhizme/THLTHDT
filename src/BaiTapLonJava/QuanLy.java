@@ -2,13 +2,18 @@ package BaiTapLonJava;
 
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class QuanLy {
     private List<Nguoi> listNguoi;
     private int type;
+    private List<GiangVien> lgvKT;
+    private List<SinhVien> lsvKT;
 
     public QuanLy(){
         this.listNguoi = new ArrayList<>();
+        this.lgvKT = new ArrayList<GiangVien>();
+
     }
 
     public void input(){
@@ -28,6 +33,8 @@ public class QuanLy {
                         GiangVien gv = new GiangVien();
                         gv.nhap();
                         this.listNguoi.add(gv);
+                        if(gv.checkKhenThuong())
+                            this.lgvKT.add(gv);
                     }
                     break;
                 case 2:
@@ -37,6 +44,8 @@ public class QuanLy {
                         SinhVien sv = new SinhVien();
                         sv.nhap();
                         this.listNguoi.add(sv);
+                        if(sv.checkKhenThuong())
+                            this.lsvKT.add(sv);
                     }
                     break;
                 case 0:
@@ -55,76 +64,24 @@ public class QuanLy {
         System.out.println("-----Menu-----");
         System.out.println("1.In ra thông tin giảng viên");
         System.out.println("2.In ra thông tin sinh viên");
-        System.out.println("0.EXIT");
-        int chon;
-        do{
-            System.out.println("Nhập vào lựa chọn của bạn");
-            chon = new Scanner(System.in).nextInt();
-            switch(chon){
-                case 1:
-                    List<GiangVien> k = listGiangVien();
-                    for(GiangVien e : k){
-                        System.out.println(e);
-                    }
-                    break;
-                case 2:
-                   List<SinhVien> c = listSinhVien();
-                    for(SinhVien e : c){
-                        System.out.println(e);
-                    }
-                    break;
-                case 0:
-                    System.out.println("------------");
-                    break;
-                default:
-                    System.out.println("Không có trong menu");
-            }
-        }while(chon!=0);
+        System.out.println("Nhập vào lựa chọn của bạn");
+        int chon = new Scanner(System.in).nextInt();
+        System.out.println(xuatTungThongTin(chon));
     }
 
-    public List<GiangVien> listGiangVien(){
-        List<GiangVien> listTemp = new ArrayList<>();
-        for(Nguoi e : this.listNguoi){
-            if(e instanceof GiangVien){
-                listTemp.add((GiangVien) e);
-            }
-        }
-        return listTemp;
+    public List<Nguoi> xuatTungThongTin(int type){
+        return this.listNguoi.stream().filter(e->{
+            if(type ==2)
+                return e instanceof SinhVien;
+            if(type == 1)
+                return e instanceof GiangVien;
+            return false;
+        }).collect(Collectors.toList());
     }
 
-    public List<SinhVien> listSinhVien(){
-        List<SinhVien> listTemp = new ArrayList<>();
-        for(Nguoi e : this.listNguoi){
-            if(e instanceof SinhVien){
-                listTemp.add((SinhVien) e);
-            }
-        }
-        return listTemp;
-    }
+    public void printKhenThuongSinhVien(){this.lsvKT.forEach(System.out::println);}
 
-    public List<SinhVien> printKhenThuongSinhVien(){
-        List<SinhVien> lsv = listSinhVien();
-        List<SinhVien> svkt = new ArrayList<>();
-        for(SinhVien e: lsv){
-            if(e.checkKhenThuong()== true){
-                System.out.println(e);
-                svkt.add(e);
-            }
-        }
-        return svkt;
-    }
-
-    public List<GiangVien> printKhenThuongGiangVien(){
-        List<GiangVien> lgv = listGiangVien();
-        List<GiangVien> gvkt = new ArrayList<>();
-        for(GiangVien e: lgv){
-            if(e.checkKhenThuong()== true){
-                System.out.println(e);
-                gvkt.add(e);
-            }
-        }
-        return gvkt;
-    }
+    public void printKhenThuongGiangVien(){this.lgvKT.forEach(System.out::println);}
 
     public Nguoi findByName(String name) {
         System.out.println("---Menu---");
@@ -153,29 +110,29 @@ public class QuanLy {
         }).findFirst().orElse(null);
     }
 
-    public void sortGiangVienKhenThuong(){
-        List<GiangVien> lsv = listGiangVien();
-        Collections.sort(lsv, new Comparator<GiangVien>() {
+   public void sortSinhVienKhenThuong(){
+        Collections.sort(this.lsvKT, new Comparator<SinhVien>() {
+           public int compare(SinhVien o1, SinhVien o2) {
+                return o1.getHoTen().compareTo(o2.getHoTen());
+            }
+        });
+   }
+
+   public void sortGiangVienKhenThuong(){
+        Collections.sort(this.lgvKT, new Comparator<GiangVien>() {
             @Override
             public int compare(GiangVien o1, GiangVien o2) {
                 return o1.getHoTen().compareTo(o2.getHoTen());
             }
         });
-    }
-
-    public void sortSinhVienKhenThuong(){
-        List<SinhVien> lsv = listSinhVien();
-        Collections.sort(lsv, new Comparator<SinhVien>() {
-            @Override
-            public int compare(SinhVien o1, SinhVien o2) {
-                return o1.getHoTen().compareTo(o2.getHoTen());
-            }
-        });
-    }
+   }
 
     public void editSinhVien(){
-        List<SinhVien> lsv = listSinhVien();
-        lsv.forEach(System.out::println);
+        for(Nguoi e : listNguoi){
+            if (e instanceof SinhVien){
+                System.out.println("STT" + listNguoi.indexOf(e)+" "+e.toString());
+            }
+        }
         System.out.println("Nhập thứ tự của sinh viên bạn muốn sửa: ");
         int chon = new Scanner(System.in).nextInt();
         System.out.println("-----Menu----");
@@ -197,17 +154,17 @@ public class QuanLy {
                  case 1:
                      System.out.println("Nhập tên bạn muốn sửa: ");
                      String name = new Scanner(System.in).nextLine();
-                     lsv.get(chon).setHoTen(name);
+                     listNguoi.get(chon).setHoTen(name);
                      break;
                  case 2:
                      System.out.println("Nhập địa chỉ bạn muốn sửa: ");
                      String diaChi = new Scanner(System.in).nextLine();
-                     lsv.get(chon).setDiaChi(diaChi);
+                     listNguoi.get(chon).setDiaChi(diaChi);
                      break;
                  case 3:
                      System.out.println("Nhập tuổi bạn muốn sửa: ");
                      int tuoi = new Scanner(System.in).nextInt();
-                     lsv.get(chon).setTuoi(tuoi);
+                     listNguoi.get(chon).setTuoi(tuoi);
                      break;
                  case 4:
                      System.out.println("Nhập giới tính bạn muốn sửa: ");
@@ -217,32 +174,32 @@ public class QuanLy {
                          check = true;
                      else if(tf ==0)
                         check = false;
-                     lsv.get(chon).setGioiTinh(check);
+                     listNguoi.get(chon).setGioiTinh(check);
                      break;
                  case 5:
                      System.out.println("Nhập số điện thoại muốn sửa: ");
                      String soDT = new Scanner(System.in).nextLine();
-                     lsv.get(chon).setSoDT(soDT);
+                     listNguoi.get(chon).setSoDT(soDT);
                      break;
                  case 6:
                      System.out.println("Nhập mã sinh viên muốn sửa: ");
                      String maSV = new Scanner(System.in).nextLine();
-                     lsv.get(chon).setMaSinhVien(maSV);
+                     ((SinhVien) this.listNguoi.get(chon)).setMaSinhVien(maSV);
                      break;
                  case 7:
                      System.out.println("Nhập lớp hành chính muốn sửa: ");
                      String lopHC = new Scanner(System.in).nextLine();
-                     lsv.get(chon).setLopHC(lopHC);
+                     ((SinhVien) this.listNguoi.get(chon)).setLopHC(lopHC);
                      break;
                  case 8:
                      System.out.println("Nhập điểm gpa muốn sửa: ");
                      double qpa = new Scanner(System.in).nextDouble();
-                     lsv.get(chon).setGpa(qpa);
+                     ((SinhVien) this.listNguoi.get(chon)).setGpa(qpa);
                      break;
                  case 9:
                      System.out.println("Nhập điểm chuyên cần muốn sửa: ");
                       double diem = new Scanner(System.in).nextDouble();
-                     lsv.get(chon).setDiemrenluyen(diem);
+                     ((SinhVien) this.listNguoi.get(chon)).setDiemrenluyen(diem);
                      break;
                  case 0:
                      System.out.println("Cảm ơn");
@@ -252,12 +209,9 @@ public class QuanLy {
              }
 
         } while (chonSua!=0);
-        lsv.forEach(e->e.toString());
     }
 
     public void editGiangVien(){
-        List<GiangVien> lgv = listGiangVien();
-        lgv.forEach(System.out::println);
         System.out.println("Nhập thứ tự của giảng viên bạn muốn sửa: ");
         int chon = new Scanner(System.in).nextInt();
         System.out.println("-----Menu----");
@@ -280,17 +234,17 @@ public class QuanLy {
                 case 1:
                     System.out.println("Nhập tên bạn muốn sửa: ");
                     String name = new Scanner(System.in).nextLine();
-                    lgv.get(chon).setHoTen(name);
+                    listNguoi.get(chon).setHoTen(name);
                     break;
                 case 2:
                     System.out.println("Nhập địa chỉ bạn muốn sửa: ");
                     String diaChi = new Scanner(System.in).nextLine();
-                    lgv.get(chon).setDiaChi(diaChi);
+                    listNguoi.get(chon).setDiaChi(diaChi);
                     break;
                 case 3:
                     System.out.println("Nhập tuổi bạn muốn sửa: ");
                     int tuoi = new Scanner(System.in).nextInt();
-                    lgv.get(chon).setTuoi(tuoi);
+                    listNguoi.get(chon).setTuoi(tuoi);
                     break;
                 case 4:
                     System.out.println("Nhập giới tính bạn muốn sửa: ");
@@ -300,37 +254,37 @@ public class QuanLy {
                         check = true;
                     else if(tf ==0)
                         check = false;
-                    lgv.get(chon).setGioiTinh(check);
+                    listNguoi.get(chon).setGioiTinh(check);
                     break;
                 case 5:
                     System.out.println("Nhập số điện thoại muốn sửa: ");
                     String soDT = new Scanner(System.in).nextLine();
-                    lgv.get(chon).setSoDT(soDT);
+                    listNguoi.get(chon).setSoDT(soDT);
                     break;
                 case 6:
                     System.out.println("Nhập mã giảng viên muốn sửa: ");
                     String magv = new Scanner(System.in).nextLine();
-                    lgv.get(chon).setMaGiaoVien(magv);
+                    ((GiangVien) this.listNguoi.get(chon)).setMaGiaoVien(magv);
                     break;
                 case 7:
                     System.out.println("Nhập bộ môn phụ trách muốn sửa: ");
                     String mon = new Scanner(System.in).nextLine();
-                    lgv.get(chon).setBoMonPhuTrach(mon);
+                    ((GiangVien) this.listNguoi.get(chon)).setBoMonPhuTrach(mon);
                     break;
                 case 8:
                     System.out.println("Nhập học vị muốn sửa: ");
                     String hv = new Scanner(System.in).nextLine();
-                    lgv.get(chon).setHocVi(hv);
+                    ((GiangVien) this.listNguoi.get(chon)).setHocVi(hv);
                     break;
                 case 9:
                     System.out.println("Nhập số lượng công trình muốn sửa: ");
                     int  sl = new Scanner(System.in).nextInt();
-                    lgv.get(chon).setSoLuongCongTrinh(sl);
+                    ((GiangVien) this.listNguoi.get(chon)).setSoLuongCongTrinh(sl);
                     break;
                 case 10:
                     System.out.println("Nhập số lượng lớp phụ trách: ");
                     int sll = new Scanner(System.in).nextInt();
-                    lgv.get(chon).setSoLuongLopPhuTrach(sll);
+                    ((GiangVien) this.listNguoi.get(chon)).setSoLuongLopPhuTrach(sll);
                 case 0:
                     System.out.println("Cảm ơn");
                     break;
@@ -339,7 +293,6 @@ public class QuanLy {
             }
 
         } while (chonSua!=0);
-        lgv.forEach(e->e.toString());
     }
 
     public void xoa(){
@@ -374,12 +327,12 @@ public class QuanLy {
                     fout.close();
                     break;
                 case 2:
-                    objout.writeObject(printKhenThuongGiangVien());
+                    objout.writeObject(lgvKT);
                     objout.close();
                     fout.close();
                     break;
                 case 3:
-                    objout.writeObject(printKhenThuongSinhVien());
+                    objout.writeObject(lsvKT);
                     objout.close();
                     fout.close();
                     break;
@@ -410,16 +363,14 @@ public class QuanLy {
                     fin.close();
                     break;
                 case 2:
-                    List<GiangVien> lkt= printKhenThuongGiangVien();
-                    lkt = new ArrayList<>();
-                    lkt = (ArrayList)objin.readObject();
+                    lgvKT = new ArrayList<>();
+                    lgvKT = (ArrayList)objin.readObject();
                     objin.close();
                     fin.close();
                     break;
                 case 3:
-                    List<SinhVien> lsvkt= printKhenThuongSinhVien();
-                    lsvkt = new ArrayList<>();
-                    lsvkt = (ArrayList)objin.readObject();
+                    lsvKT = new ArrayList<>();
+                    lsvKT = (ArrayList)objin.readObject();
                     objin.close();
                     fin.close();
                     break;

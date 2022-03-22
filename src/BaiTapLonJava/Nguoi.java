@@ -1,6 +1,7 @@
 package BaiTapLonJava;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Nguoi implements Serializable {
@@ -92,5 +93,18 @@ public class Nguoi implements Serializable {
         }
         System.out.println("Nhâp vào số điện thoại: ");
         this.soDT = new Scanner(System.in).nextLine();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Nguoi nguoi = (Nguoi) o;
+        return tuoi == nguoi.tuoi && gioiTinh == nguoi.gioiTinh && Objects.equals(hoTen, nguoi.hoTen) && Objects.equals(diaChi, nguoi.diaChi) && Objects.equals(soDT, nguoi.soDT);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(hoTen, diaChi, tuoi, gioiTinh, soDT);
     }
 }

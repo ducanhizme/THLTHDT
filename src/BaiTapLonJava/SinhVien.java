@@ -1,5 +1,6 @@
 package BaiTapLonJava;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class SinhVien extends Nguoi implements KhenThuong {
@@ -79,5 +80,19 @@ public class SinhVien extends Nguoi implements KhenThuong {
         System.out.println("Nhập vào điểm rèn luyện :");
         this.diemrenluyen = new Scanner(System.in).nextDouble();
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        SinhVien sinhVien = (SinhVien) o;
+        return Double.compare(sinhVien.gpa, gpa) == 0 && Double.compare(sinhVien.diemrenluyen, diemrenluyen) == 0 && Objects.equals(maSinhVien, sinhVien.maSinhVien) && Objects.equals(lopHC, sinhVien.lopHC);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), maSinhVien, lopHC, gpa, diemrenluyen);
     }
 }

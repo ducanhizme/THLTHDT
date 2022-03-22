@@ -6,22 +6,22 @@ import java.util.Scanner;
 
 public class main {
     public static void menu() {
-        System.out.println("----Menu----\n" +
-                "1.Nhập thông tin giảng viên sinh viên\n" +
-                "2.In ra thông tin\n" +
-                "3.Tìm thông tin theo tên\n" +
-                "4.Sắp xếp thông tin Giảng viên được khen thưởng\n" +
-                "5.Sắp xếp thông tin Sinh viên được khen thưởng\n" +
-                "6.Chỉnh sửa sinh viên\n" +
-                "7.Chỉnh sửa giảng viên\n" +
-                "8.Xóa thông tin\n" +
-                "9.Ghi file\n" +
-                "10.Đọc file\n" +
-                "0.EXIT");
-        System.out.println("----------------------------------------------");
+        System.out.println("--------------------------Menu---------------------\n" +
+                          "|1.Nhập thông tin giảng viên sinh viên             |\n" +
+                          "|2.In ra thông tin                                 |\n" +
+                          "|3.Tìm thông tin theo tên                          |\n" +
+                          "|4.Sắp xếp thông tin Giảng viên được khen thưởng   |\n" +
+                          "|5.Sắp xếp thông tin Sinh viên được khen thưởng    |\n" +
+                          "|6.Chỉnh sửa sinh viên                             |\n" +
+                          "|7.Chỉnh sửa giảng viên                            |\n" +
+                          "|8.Xóa thông tin                                   |\n" +
+                          "|9.Ghi file                                        |\n" +
+                          "|10.Đọc file                                       |\n" +
+                          "|0.EXIT                                            |");
+        System.out.println("---------------------------------------------------");
     }
     public static void drawLine(){
-        System.out.println("-----------------------------------------------");
+        System.out.println("----------------------------------------------------");
     }
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         QuanLy ql = new QuanLy();
