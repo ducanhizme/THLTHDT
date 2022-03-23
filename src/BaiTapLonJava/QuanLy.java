@@ -18,12 +18,13 @@ public class QuanLy {
     }
 
     public void input(){
-        System.out.println("-----Menu-----");
-        System.out.println("1.Giảng Viên");
-        System.out.println("2.Sinh viên");
-        System.out.println("0.EXIT");
+
         int chon;
         do{
+            System.out.println("-----Menu-----");
+            System.out.println("1.Giảng Viên");
+            System.out.println("2.Sinh viên");
+            System.out.println("0.EXIT");
             System.out.println("Nhập vào lựa chọn muốn nhập: ");
             chon = new Scanner(System.in).nextInt();
             switch(chon){
@@ -32,6 +33,7 @@ public class QuanLy {
                     int n = new Scanner(System.in).nextInt();
                     for (int i = 0; i <n ; i++) {
                         GiangVien gv = new GiangVien();
+                        System.out.println("-Nhập thông tin giảng viên thứ "+(i+1));
                         gv.nhap();
                         this.listNguoi.add(gv);
                         if(gv.checkKhenThuong())
@@ -43,6 +45,7 @@ public class QuanLy {
                     int m = new Scanner(System.in).nextInt();
                     for (int i = 0; i < m ; i++) {
                         SinhVien sv = new SinhVien();
+                        System.out.println("-Nhập thông tin sinh viên thứ "+(i+1));
                         sv.nhap();
                         this.listNguoi.add(sv);
                         if(sv.checkKhenThuong())
@@ -60,33 +63,38 @@ public class QuanLy {
 
     public void printAllList(){
         for(Nguoi nguoi : listNguoi){
-            System.out.println(nguoi);
+            System.out.println("STT : " + (listNguoi.indexOf(nguoi)+1) + nguoi) ;
         }
     }
     public void xuatTungThongTin(){
-        System.out.println("-----Menu-----");
-        System.out.println("1.In ra thông tin giảng viên");
-        System.out.println("2.In ra thông tin sinh viên");
-        System.out.println("Nhập vào lựa chọn của bạn");
-        int chon = new Scanner(System.in).nextInt();
+        int chon;
+        do{
+            System.out.println("-----Menu-----");
+            System.out.println("1.In ra thông tin giảng viên");
+            System.out.println("2.In ra thông tin sinh viên");
+            System.out.println("0.Exit");
+            System.out.println("Nhập vào lựa chọn của bạn");
+            chon = new Scanner(System.in).nextInt();
 
 //        System.out.println(xuatTungThongTin(chon));
-        switch(chon){
-            case 1:{
-                for(Nguoi nguoi : listNguoi){
-                    if(nguoi instanceof GiangVien)
-                        System.out.println(nguoi);
+            switch(chon){
+                case 1:{
+                    for(Nguoi nguoi : listNguoi){
+                        if(nguoi instanceof GiangVien)
+                            System.out.println(nguoi);
+                    }
+                    break;
                 }
-                break;
-            }
-            case 2:{
-                for(Nguoi nguoi : listNguoi){
-                    if(nguoi instanceof SinhVien)
-                        System.out.println(nguoi);
+                case 2:{
+                    for(Nguoi nguoi : listNguoi){
+                        if(nguoi instanceof SinhVien)
+                            System.out.println(nguoi);
+                    }
+                    break;
                 }
-                break;
             }
-        }
+        }while (chon !=0);
+
     }
 
 //    public List<Nguoi> xuatTungThongTin(int type){
@@ -119,6 +127,7 @@ public class QuanLy {
         System.out.println("1.Sinh Viên");
         System.out.println("2.Giảng Viên");
         System.out.println("0.Exit");
+        int test=0;
         do {
             this.type = new Scanner(System.in).nextInt();
             switch(this.type){
@@ -126,21 +135,26 @@ public class QuanLy {
                     for(Nguoi nguoi : listNguoi){
                         if(nguoi instanceof SinhVien){
                             if(nguoi.getHoTen().equalsIgnoreCase(name)){
+                                test=1;
                                 System.out.println("Thông tin sinh viên cần tìm là : ");
                                 System.out.println(nguoi);
+
                             }
                         }
                     }
+                    break;
                 }
                 case 2 : {
                     for(Nguoi nguoi : listNguoi){
                         if(nguoi instanceof GiangVien){
                             if(nguoi.getHoTen().equalsIgnoreCase(name)){
+                                test=1;
                                 System.out.println("Thông tin giảng viên cần tìm là : ");
                                 System.out.println(nguoi);
                             }
                         }
                     }
+                    break;
                 }
                 default:{
                     System.out.println("Không có trong menu, hãy nhập lại ");
@@ -148,6 +162,8 @@ public class QuanLy {
                 }
             }
         }while (this.type!=0);
+        if(test==0)
+            System.out.println("Tên không có trong danh sách đã nhập");
 
 //        return this.listNguoi.stream().filter(e -> {
 //            if(this.type ==1){
@@ -177,6 +193,8 @@ public class QuanLy {
                 return o1.getHoTen().compareTo(o2.getHoTen());
             }
         });
+        System.out.println("Sắp xếp thành công : ");
+        printKhenThuongSinhVien();
     }
 
     public void sortGiangVienKhenThuong(){
@@ -186,29 +204,33 @@ public class QuanLy {
                 return o1.getHoTen().compareTo(o2.getHoTen());
             }
         });
+        System.out.println("Sắp xếp thành công : ");
+        printKhenThuongGiangVien();
     }
 
     public void editSinhVien(){
         for(Nguoi e : listNguoi){
             if (e instanceof SinhVien){
-                System.out.println("STT" + listNguoi.indexOf(e)+" "+e.toString());
+                System.out.println("STT : " + (listNguoi.indexOf(e)+1)+" "+e.toString());
             }
         }
         System.out.println("Nhập thứ tự của sinh viên bạn muốn sửa: ");
         int chon = new Scanner(System.in).nextInt();
-        System.out.println("-----Menu----");
-        System.out.println("1.Sửa tên");
-        System.out.println("2.Sửa địa chỉ ");
-        System.out.println("3.Sửa tuổi\n" +
-                "4Sửa giới tính \n" +
-                "5.Sửa số điện thoại\n" +
-                "6.Sửa mã sinh viên \n" +
-                "7.Sửa lớp hành chính\n" +
-                "8.Sửa gpa \n" +
-                "9.Sửa điểm rèn luyện\n" +
-                "0.Exit");
+        chon--;
+
         int chonSua;
         do {
+            System.out.println("-----Menu----");
+            System.out.println("1.Sửa tên");
+            System.out.println("2.Sửa địa chỉ ");
+            System.out.println("3.Sửa tuổi\n" +
+                    "4Sửa giới tính \n" +
+                    "5.Sửa số điện thoại\n" +
+                    "6.Sửa mã sinh viên \n" +
+                    "7.Sửa lớp hành chính\n" +
+                    "8.Sửa gpa \n" +
+                    "9.Sửa điểm rèn luyện\n" +
+                    "0.Exit");
             System.out.println("Bạn muốn sửa: ");
             chonSua = new Scanner(System.in).nextInt();
             switch(chonSua){
@@ -273,22 +295,29 @@ public class QuanLy {
     }
 
     public void editGiangVien(){
+        for(Nguoi e : listNguoi){
+            if (e instanceof GiangVien){
+                System.out.println("STT : " + (listNguoi.indexOf(e)+1)+" "+e.toString());
+            }
+        }
         System.out.println("Nhập thứ tự của giảng viên bạn muốn sửa: ");
         int chon = new Scanner(System.in).nextInt();
-        System.out.println("-----Menu----");
-        System.out.println("1.Sửa tên");
-        System.out.println("2.Sửa địa chỉ ");
-        System.out.println("3.Sửa tuổi\n" +
-                "4Sửa giới tính \n" +
-                "5.Sửa số điện thoại\n" +
-                "6.Sửa mã giảng viên \n" +
-                "7.Sửa bộ môn phụ trách\n" +
-                "8.Sửa học vị\n" +
-                "9.Sửa số lượng công trình\n" +
-                "10.Sửa số lượng lớp phụ trách\n"+
-                "0.Exit");
+        chon--;
+
         int chonSua;
         do {
+            System.out.println("-----Menu----");
+            System.out.println("1.Sửa tên");
+            System.out.println("2.Sửa địa chỉ ");
+            System.out.println("3.Sửa tuổi\n" +
+                    "4Sửa giới tính \n" +
+                    "5.Sửa số điện thoại\n" +
+                    "6.Sửa mã giảng viên \n" +
+                    "7.Sửa bộ môn phụ trách\n" +
+                    "8.Sửa học vị\n" +
+                    "9.Sửa số lượng công trình\n" +
+                    "10.Sửa số lượng lớp phụ trách\n"+
+                    "0.Exit");
             System.out.println("Bạn muốn sửa: ");
             chonSua = new Scanner(System.in).nextInt();
             switch(chonSua){
@@ -357,15 +386,26 @@ public class QuanLy {
     }
 
     public void xoa(){
-        System.out.println("Nhâp vào tên người bạn muốn xóa và SDT");
-        System.out.print("Họ và tên:  ");
-        String name = new Scanner(System.in).nextLine();
-        System.out.print("SDT: ");
-        String sdt = new Scanner(System.in).nextLine();
+        System.out.println("Nhâp vào mã giảng viên hoặc mã sinh viên bạn muốn xóa: ");
+        String Maso =new Scanner(System.in).nextLine();
+//        System.out.print("Họ và tên:  ");
+//        String name = new Scanner(System.in).nextLine();
+//        System.out.print("SDT: ");
+//        String sdt = new Scanner(System.in).nextLine();
         for(Nguoi e : listNguoi){
-            if(e.getHoTen().equalsIgnoreCase(name) && e.getSoDT().equalsIgnoreCase(sdt))
-                this.listNguoi.remove(e);
+//            if(e.getHoTen().equalsIgnoreCase(name) && e.getSoDT().equalsIgnoreCase(sdt))
+            if(e instanceof SinhVien){
+                if(((SinhVien) e).getMaSinhVien().equalsIgnoreCase(Maso))
+                   this.listNguoi.remove(e);
+            }
+            if(e instanceof GiangVien){
+                if(((GiangVien) e).getMaGiaoVien().equalsIgnoreCase(Maso)){
+                    this.listNguoi.remove(e);
+                }
+            }
+
         }
+        System.out.println("Xóa thành công ");
     }
 
     public void luuFile(String path) throws FileNotFoundException, IOException {

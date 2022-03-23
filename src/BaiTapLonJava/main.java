@@ -10,8 +10,8 @@ public class main {
                           "|1.Nhập thông tin giảng viên sinh viên             |\n" +
                           "|2.In ra thông tin                                 |\n" +
                           "|3.Tìm thông tin theo tên                          |\n" +
-                          "|4.Sắp xếp thông tin Giảng viên được khen thưởng   |\n" +
-                          "|5.Sắp xếp thông tin Sinh viên được khen thưởng    |\n" +
+                          "|4.Sắp xếp theo tên Giảng viên được khen thưởng    |\n" +
+                          "|5.Sắp xếp theo tên Sinh viên được khen thưởng     |\n" +
                           "|6.Chỉnh sửa sinh viên                             |\n" +
                           "|7.Chỉnh sửa giảng viên                            |\n" +
                           "|8.Xóa thông tin                                   |\n" +
@@ -26,10 +26,11 @@ public class main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         QuanLy ql = new QuanLy();
         String path = "";
-        menu();
-        while (true) {
+        int choice;
+        do {
+            menu();
             System.out.println("Nhập lựa chọn của bạn: ");
-            int choice = new Scanner(System.in).nextInt();
+            choice = new Scanner(System.in).nextInt();
             switch (choice) {
                 case 1:
                     ql.input();
@@ -112,8 +113,8 @@ public class main {
                     break;
 
             }
+        } while (choice != 0);
 
 
-        }
     }
 }
