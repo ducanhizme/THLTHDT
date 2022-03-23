@@ -392,19 +392,25 @@ public class QuanLy {
 //        String name = new Scanner(System.in).nextLine();
 //        System.out.print("SDT: ");
 //        String sdt = new Scanner(System.in).nextLine();
-        for(Nguoi e : listNguoi){
+//        for(Nguoi e : listNguoi){
 //            if(e.getHoTen().equalsIgnoreCase(name) && e.getSoDT().equalsIgnoreCase(sdt))
+//                this.listNguoi.remove(e);ư\
+        Nguoi e = new Nguoi();
+        for(int i=0; i<listNguoi.size(); i++){
+            e = listNguoi.get(i);
             if(e instanceof SinhVien){
                 if(((SinhVien) e).getMaSinhVien().equalsIgnoreCase(Maso))
-                   this.listNguoi.remove(e);
+                    this.listNguoi.remove(e);
             }
             if(e instanceof GiangVien){
                 if(((GiangVien) e).getMaGiaoVien().equalsIgnoreCase(Maso)){
                     this.listNguoi.remove(e);
                 }
             }
-
         }
+
+
+//        }
         System.out.println("Xóa thành công ");
     }
 
