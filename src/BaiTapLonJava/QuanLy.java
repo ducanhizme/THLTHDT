@@ -128,40 +128,40 @@ public class QuanLy {
         System.out.println("2.Giảng Viên");
         System.out.println("0.Exit");
         int test=0;
-        do {
-            this.type = new Scanner(System.in).nextInt();
-            switch(this.type){
-                case 1 : {
-                    for(Nguoi nguoi : listNguoi){
-                        if(nguoi instanceof SinhVien){
-                            if(nguoi.getHoTen().equalsIgnoreCase(name)){
-                                test=1;
-                                System.out.println("Thông tin sinh viên cần tìm là : ");
-                                System.out.println(nguoi);
-
-                            }
+        this.type = new Scanner(System.in).nextInt();
+        switch(this.type){
+            case 1 : {
+                for(Nguoi nguoi : listNguoi){
+                    if(nguoi instanceof SinhVien){
+                        if(nguoi.getHoTen().equalsIgnoreCase(name)){
+                            test=1;
+                            System.out.println("Thông tin sinh viên cần tìm là : ");
+                            System.out.println(nguoi);
                         }
                     }
-                    break;
                 }
-                case 2 : {
-                    for(Nguoi nguoi : listNguoi){
-                        if(nguoi instanceof GiangVien){
-                            if(nguoi.getHoTen().equalsIgnoreCase(name)){
-                                test=1;
-                                System.out.println("Thông tin giảng viên cần tìm là : ");
-                                System.out.println(nguoi);
-                            }
-                        }
-                    }
-                    break;
-                }
-                default:{
-                    System.out.println("Không có trong menu, hãy nhập lại ");
-                    break;
-                }
+                break;
             }
-        }while (this.type!=0);
+            case 2 : {
+                for(Nguoi nguoi : listNguoi){
+                    if(nguoi instanceof GiangVien){
+                        if(nguoi.getHoTen().equalsIgnoreCase(name)){
+                            test=1;
+                            System.out.println("Thông tin giảng viên cần tìm là : ");
+                            System.out.println(nguoi);
+                        }
+                    }
+                }
+                break;
+            }
+            case 0:
+                System.out.println("Cảm ơn bạn đã nhập ");
+                break;
+            default:{
+                System.out.println("Không có trong menu, hãy nhập lại ");
+                break;
+            }
+        }
         if(test==0)
             System.out.println("Tên không có trong danh sách đã nhập");
 
@@ -414,8 +414,8 @@ public class QuanLy {
         f = new File(path);
         FileOutputStream fout= new FileOutputStream(f);
         ObjectOutputStream objout = new ObjectOutputStream(fout);
-        System.out.println("---Menu---\n"+"1.Lưu thông tin toàn bộ giảng viên sinh viên\n "+"2.Lưu thông tin giảng viên được khen thưởng" +
-                "3.Lưu thông tin sinh viên được khen thưởng" +
+        System.out.println("---Menu---\n"+"1.Lưu thông tin toàn bộ giảng viên sinh viên\n"+"2.Lưu thông tin giảng viên được khen thưởng\n" +
+                "3.Lưu thông tin sinh viên được khen thưởng\n" +
                 "0.Exit");
         int choice;
         do {
@@ -426,16 +426,19 @@ public class QuanLy {
                     objout.writeObject(listNguoi);
                     objout.close();
                     fout.close();
+                    System.out.println("Lưu thành công ");
                     break;
                 case 2:
                     objout.writeObject(lgvKT);
                     objout.close();
                     fout.close();
+                    System.out.println("Lưu thành công ");
                     break;
                 case 3:
                     objout.writeObject(lsvKT);
                     objout.close();
                     fout.close();
+                    System.out.println("Lưu thành công ");
                     break;
                 case 0:
                     System.out.println("Cảm ơn bạn đã nhập (file đã nhập"+path+" )");
@@ -451,10 +454,10 @@ public class QuanLy {
         ObjectInputStream objin = new ObjectInputStream(fin);
         int choice;
         do {
-            System.out.println("---Menu---\n"+"1.Đọc thông tin toàn bộ giảng viên sinh viên\n "+"2.Đọc thông tin giảng viên được khen thưởng" +
-                    "3.Đọc thông tin sinh viên được khen thưởng" +
+            System.out.println("---Menu---\n"+"1.Đọc thông tin toàn bộ giảng viên sinh viên\n"+"2.Đọc thông tin giảng viên được khen thưởng\n" +
+                    "3.Đọc thông tin sinh viên được khen thưởng\n" +
                     "0.Exit");
-            System.out.println("Nhập vào kiểu"+path +"đã lưu: ");
+            System.out.println("Nhập vào kiểu file "+path +" đã lưu: ");
             choice =new Scanner(System.in).nextInt();
             switch (choice){
                 case 1:
@@ -462,18 +465,21 @@ public class QuanLy {
                     listNguoi = (ArrayList)objin.readObject();
                     objin.close();
                     fin.close();
+                    System.out.println("Đọc thành công");
                     break;
                 case 2:
                     lgvKT = new ArrayList<>();
                     lgvKT = (ArrayList)objin.readObject();
                     objin.close();
                     fin.close();
+                    System.out.println("Đọc thành công");
                     break;
                 case 3:
                     lsvKT = new ArrayList<>();
                     lsvKT = (ArrayList)objin.readObject();
                     objin.close();
                     fin.close();
+                    System.out.println("Đọc thành công");
                     break;
                 case 0:
                     System.out.println("Cảm ơn bạn đã nhâp");

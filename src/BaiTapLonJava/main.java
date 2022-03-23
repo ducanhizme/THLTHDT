@@ -37,14 +37,15 @@ public class main {
                     drawLine();
                     break;
                 case 2:
-                    System.out.println("In ra:\n" +
-                            "1.In ra danh sách giảng viên sinh viên\n" +
-                            "2.In ra từng giảng viên hoặc sinh viên\n" +
-                            "3.In ra sinh viên được khen thưởng\n" +
-                            "4.In ra giảng viên được khen thưởng\n" +
-                            "0.EXIT");
+
                     int luaChon;
                     do {
+                        System.out.println("In ra:\n" +
+                                "1.In ra danh sách giảng viên sinh viên\n" +
+                                "2.In ra từng giảng viên hoặc sinh viên\n" +
+                                "3.In ra sinh viên được khen thưởng\n" +
+                                "4.In ra giảng viên được khen thưởng\n" +
+                                "0.EXIT");
                         System.out.println("Nhập lựa chọn in ra ");
                         luaChon = new Scanner(System.in).nextInt();
                         switch (luaChon) {
