@@ -79,7 +79,7 @@ public class main {
                     break;
                 case 3:
                     System.out.println("Trung bình thành tiền của giao dịch tiền tệ" );
-                    ql.in();
+
                     break;
                 case 4:
                     System.out.println("Giao dịch có đơn giá trên 1 tỷ: ");

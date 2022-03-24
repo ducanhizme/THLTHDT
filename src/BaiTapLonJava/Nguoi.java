@@ -76,6 +76,7 @@ public class Nguoi implements Serializable {
                 "SDT: "+soDT +"\t\t";
     }
 
+
     public void nhap(){
         System.out.println("Nhập vào tên :");
         this.hoTen=new Scanner(System.in).nextLine();

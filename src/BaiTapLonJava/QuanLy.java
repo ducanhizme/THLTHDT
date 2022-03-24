@@ -504,6 +504,7 @@ public class QuanLy {
                     else
                         System.out.println(path +" trống");
                     System.out.println("Đọc thành công");
+
                     break;
                 case 3:
                     lsvKT = new ArrayList<>();

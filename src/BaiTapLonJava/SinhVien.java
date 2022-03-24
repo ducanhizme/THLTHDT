@@ -63,6 +63,7 @@ public class SinhVien extends Nguoi implements KhenThuong {
     @Override
     public boolean checkKhenThuong() { return this.gpa >=3.2&&this.diemrenluyen>7;}
 
+
     public void nhap(){
         super.nhap();
         System.out.println("Nhập vào mã sinh viên: ");

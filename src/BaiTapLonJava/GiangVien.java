@@ -21,6 +21,7 @@ public class GiangVien extends Nguoi implements KhenThuong {
         this.soLuongLopPhuTrach = soLuongLopPhuTrach;
     }
 
+
     public String getMaGiaoVien() {
         return maGiaoVien;
     }
