@@ -29,7 +29,7 @@ public class main {
         int choice;
         do {
             menu();
-            System.out.println("Nhập lựa chọn của bạn: ");
+            System.out.println("Nhập lựa chọn của chức năng: ");
             choice = new Scanner(System.in).nextInt();
             switch (choice) {
                 case 1:
@@ -103,14 +103,14 @@ public class main {
                     ql.luuFile(path);
                     break;
                 case 10:
-                    System.out.println("Đọc file" + path);
+                    System.out.println("Đọc file " + path);
                     ql.docFile(path);
                     break;
                 case 0:
                     System.out.println("Cảm ơn bạn đã nhập");
                     break;
                 default:
-                    System.out.println("Lựa chọn không có trong menu");
+                    System.out.println("Không có chức năng này trong menu");
                     break;
 
             }

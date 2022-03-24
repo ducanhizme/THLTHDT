@@ -2,7 +2,6 @@ package BaiTapLonJava;
 
 import java.io.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class QuanLy {
     private List<Nguoi> listNguoi;
@@ -75,8 +74,6 @@ public class QuanLy {
             System.out.println("0.Exit");
             System.out.println("Nhập vào lựa chọn của bạn");
             chon = new Scanner(System.in).nextInt();
-
-//        System.out.println(xuatTungThongTin(chon));
             switch(chon){
                 case 1:{
                     for(Nguoi nguoi : listNguoi){
@@ -110,15 +107,24 @@ public class QuanLy {
 
     public void printKhenThuongSinhVien(){
 //        this.lsvKT.forEach(System.out::println);
-        for(SinhVien sv : lsvKT){
-            System.out.println(sv);
+        if(lsvKT.isEmpty()){
+            System.out.println("Không có sinh viên nào được xét thưởng: ");
+        }else{
+            for(SinhVien sv : lsvKT){
+                System.out.println(sv);
+            }
         }
+
     }
 
     public void printKhenThuongGiangVien(){
 //        this.lgvKT.forEach(System.out::println);
-        for(GiangVien gv : lgvKT){
-            System.out.println(gv);
+        if (lgvKT.isEmpty()) {
+            System.out.println("Không có sinh viên nào được xét thưởng");
+        } else {
+            for(GiangVien gv : lgvKT){
+                System.out.println(gv);
+            }
         }
     }
 
@@ -217,7 +223,6 @@ public class QuanLy {
         System.out.println("Nhập thứ tự của sinh viên bạn muốn sửa: ");
         int chon = new Scanner(System.in).nextInt();
         chon--;
-
         int chonSua;
         do {
             System.out.println("-----Menu----");
@@ -292,6 +297,13 @@ public class QuanLy {
             }
 
         } while (chonSua!=0);
+        for(Nguoi e:listNguoi){
+            if(e instanceof SinhVien){
+                if(((SinhVien) e).checkKhenThuong()){
+                    this.lsvKT.add((SinhVien) e);
+                }
+            }
+        }
     }
 
     public void editGiangVien(){
@@ -303,7 +315,6 @@ public class QuanLy {
         System.out.println("Nhập thứ tự của giảng viên bạn muốn sửa: ");
         int chon = new Scanner(System.in).nextInt();
         chon--;
-
         int chonSua;
         do {
             System.out.println("-----Menu----");
@@ -383,6 +394,13 @@ public class QuanLy {
             }
 
         } while (chonSua!=0);
+        for(Nguoi e:listNguoi){
+            if(e instanceof GiangVien){
+                if(((GiangVien) e).checkKhenThuong()){
+                    this.lgvKT.add((GiangVien) e);
+                }
+            }
+        }
     }
 
     public void xoa(){
@@ -415,17 +433,16 @@ public class QuanLy {
     }
 
     public void luuFile(String path) throws FileNotFoundException, IOException {
-
         File f;
         f = new File(path);
         FileOutputStream fout= new FileOutputStream(f);
         ObjectOutputStream objout = new ObjectOutputStream(fout);
-        System.out.println("---Menu---\n"+"1.Lưu thông tin toàn bộ giảng viên sinh viên\n"+"2.Lưu thông tin giảng viên được khen thưởng\n" +
-                "3.Lưu thông tin sinh viên được khen thưởng\n" +
-                "0.Exit");
         int choice;
         do {
-            System.out.println("Nhập lựa chọn của bạn: ");
+            System.out.println("---Menu---\n"+"1.Lưu thông tin toàn bộ giảng viên sinh viên\n"+"2.Lưu thông tin giảng viên được khen thưởng\n" +
+                    "3.Lưu thông tin sinh viên được khen thưởng\n" +
+                    "0.Exit");
+            System.out.println("Nhập lựa chọn của bạn để lưu file : ");
             choice = new Scanner(System.in).nextInt();
             switch(choice){
                 case 1:
@@ -447,7 +464,7 @@ public class QuanLy {
                     System.out.println("Lưu thành công ");
                     break;
                 case 0:
-                    System.out.println("Cảm ơn bạn đã nhập (file đã nhập"+path+" )");
+                    System.out.println("Cảm ơn bạn đã nhập (file đã nhập "+path+" )");
                 default:
                     System.out.println("Lưa chọn không có trong menu");
             }
@@ -463,7 +480,7 @@ public class QuanLy {
             System.out.println("---Menu---\n"+"1.Đọc thông tin toàn bộ giảng viên sinh viên\n"+"2.Đọc thông tin giảng viên được khen thưởng\n" +
                     "3.Đọc thông tin sinh viên được khen thưởng\n" +
                     "0.Exit");
-            System.out.println("Nhập vào kiểu file "+path +" đã lưu: ");
+            System.out.println("Nhập vào kiểu file "+path +" đã lưu để đọc: ");
             choice =new Scanner(System.in).nextInt();
             switch (choice){
                 case 1:
@@ -471,6 +488,10 @@ public class QuanLy {
                     listNguoi = (ArrayList)objin.readObject();
                     objin.close();
                     fin.close();
+                    if(!listNguoi.isEmpty())
+                        listNguoi.forEach(e-> System.out.println(e.toString()));
+                    else
+                        System.out.println(path + " trống");
                     System.out.println("Đọc thành công");
                     break;
                 case 2:
@@ -478,6 +499,10 @@ public class QuanLy {
                     lgvKT = (ArrayList)objin.readObject();
                     objin.close();
                     fin.close();
+                    if(!lgvKT.isEmpty())
+                        lgvKT.forEach(e-> System.out.println(e.toString()));
+                    else
+                        System.out.println(path +" trống");
                     System.out.println("Đọc thành công");
                     break;
                 case 3:
@@ -485,6 +510,10 @@ public class QuanLy {
                     lsvKT = (ArrayList)objin.readObject();
                     objin.close();
                     fin.close();
+                    if(!lsvKT.isEmpty())
+                        lsvKT.forEach(e-> System.out.println(e.toString()));
+                    else
+                        System.out.println(path +" trống");
                     System.out.println("Đọc thành công");
                     break;
                 case 0:

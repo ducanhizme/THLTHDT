@@ -61,13 +61,7 @@ public class SinhVien extends Nguoi implements KhenThuong {
     }
 
     @Override
-    public boolean checkKhenThuong() {
-        if(this.gpa >=3.2&&this.diemrenluyen>7)
-            return true;
-        else
-            return false;
-
-    }
+    public boolean checkKhenThuong() { return this.gpa >=3.2&&this.diemrenluyen>7;}
 
     public void nhap(){
         super.nhap();
@@ -82,17 +76,4 @@ public class SinhVien extends Nguoi implements KhenThuong {
 
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        SinhVien sinhVien = (SinhVien) o;
-        return Double.compare(sinhVien.gpa, gpa) == 0 && Double.compare(sinhVien.diemrenluyen, diemrenluyen) == 0 && Objects.equals(maSinhVien, sinhVien.maSinhVien) && Objects.equals(lopHC, sinhVien.lopHC);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), maSinhVien, lopHC, gpa, diemrenluyen);
-    }
 }

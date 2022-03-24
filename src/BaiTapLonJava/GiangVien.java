@@ -10,8 +10,7 @@ public class GiangVien extends Nguoi implements KhenThuong {
     private int soLuongCongTrinh;
     private int soLuongLopPhuTrach;
 
-    public GiangVien() {
-    }
+    public GiangVien() {}
 
     public GiangVien(String hoTen, String diaChi, int tuoi, boolean gioiTinh, String soDT, String maGiaoVien, String boMonPhuTrach, String hocVi, int soLuongCongTrinh, int soLuongLopPhuTrach) {
         super(hoTen, diaChi, tuoi, gioiTinh, soDT);
@@ -74,12 +73,7 @@ public class GiangVien extends Nguoi implements KhenThuong {
     }
 
     @Override
-    public boolean checkKhenThuong() {
-        if(this.soLuongCongTrinh > 3&&this.soLuongLopPhuTrach>8)
-            return true;
-        else
-            return false;
-    }
+    public boolean checkKhenThuong() {return this.soLuongCongTrinh > 3 && this.soLuongLopPhuTrach>8;}
 
     public void nhap(){
         super.nhap();

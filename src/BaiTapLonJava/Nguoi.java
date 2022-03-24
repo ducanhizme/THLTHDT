@@ -11,8 +11,7 @@ public class Nguoi implements Serializable {
     private boolean gioiTinh;
     private String soDT;
 
-    public Nguoi() {
-    }
+    public Nguoi() {}
 
     public Nguoi(String hoTen, String diaChi, int tuoi, boolean gioiTinh, String soDT) {
         this.hoTen = hoTen;
@@ -61,7 +60,7 @@ public class Nguoi implements Serializable {
     public void setSoDT(String soDT) {
         this.soDT = soDT;
     }
-    //// TODO: 17/03/2022 Format lại toString để in ra thông tin ( Không phải hiện hàm hiện nữa )
+
     @Override
     public String toString() {
         String temp = "";
