@@ -297,6 +297,7 @@ public class QuanLy {
             }
 
         } while (chonSua!=0);
+        this.lsvKT.clear();
         for(Nguoi e:listNguoi){
             if(e instanceof SinhVien){
                 if(((SinhVien) e).checkKhenThuong()){
@@ -394,6 +395,7 @@ public class QuanLy {
             }
 
         } while (chonSua!=0);
+        this.lgvKT.clear();
         for(Nguoi e:listNguoi){
             if(e instanceof GiangVien){
                 if(((GiangVien) e).checkKhenThuong()){
@@ -401,6 +403,7 @@ public class QuanLy {
                 }
             }
         }
+
     }
 
     public void xoa(){
@@ -413,16 +416,18 @@ public class QuanLy {
 //        for(Nguoi e : listNguoi){
 //            if(e.getHoTen().equalsIgnoreCase(name) && e.getSoDT().equalsIgnoreCase(sdt))
 //                this.listNguoi.remove(e);ư\
-        Nguoi e = new Nguoi();
+
         for(int i=0; i<listNguoi.size(); i++){
-            e = listNguoi.get(i);
+            Nguoi e = listNguoi.get(i);
             if(e instanceof SinhVien){
                 if(((SinhVien) e).getMaSinhVien().equalsIgnoreCase(Maso))
                     this.listNguoi.remove(e);
+                    this.lsvKT.remove(e);
             }
             if(e instanceof GiangVien){
                 if(((GiangVien) e).getMaGiaoVien().equalsIgnoreCase(Maso)){
                     this.listNguoi.remove(e);
+                    this.lgvKT.remove(e);
                 }
             }
         }
