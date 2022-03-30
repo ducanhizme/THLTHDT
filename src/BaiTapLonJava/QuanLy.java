@@ -299,7 +299,7 @@ public class QuanLy {
         } while (chonSua!=0);
         for(Nguoi e:listNguoi){
             if(e instanceof SinhVien){
-                if(((SinhVien) e).checkKhenThuong()){
+                if(((SinhVien) e).checkKhenThuong() && !this.lsvKT.contains(((SinhVien) e))){
                     this.lsvKT.add((SinhVien) e);
                 }
             }
