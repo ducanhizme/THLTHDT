@@ -65,21 +65,27 @@ public class QuanLy {
         System.out.println("Số lượng hóa đơn theo ngày: "+ sum1);
     }
 
-    public void tongTrungBinh () throws ParseException {
-        double sum  =0;
+    public void tongTrungBinh () throws ParseException, IOException, ClassNotFoundException {
+        docFile();
+        double sum =0;
+        double sum1 =0;
         int dem =0;
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        Date temp = sdf.parse("31-08-2013");
-        for(HoaDon e : dshd){
-            long diff = temp.getTime() - e.getNgayHD().getTime();
-            TimeUnit time = TimeUnit.DAYS;
-            long diffrence = time.convert(diff, TimeUnit.MILLISECONDS);
-            if(diffrence <30 &&e.getNgayHD().after(temp)){
-                sum += ((HoaDonNgay) e).thanhTien()+((HoaDonGIo) e).thanhTien();
-                dem++;
+        Date temp = sdf.parse("1-09-2013");
+        Date temp1 =sdf.parse("31-09-2013");
+        for(HoaDon e : dshd) {
+            if(temp.compareTo(e.getNgayHD()) < 0 && temp1.compareTo(e.getNgayHD()) > 0) {
+                if(e instanceof HoaDonGIo) {
+                    sum+= ((HoaDonGIo)e).thanhTien();
+                    dem++;
+                }else if(e instanceof HoaDonNgay) {
+                    sum1 += ((HoaDonNgay)e).thanhTien();
+                    dem++;
+                }
             }
+
         }
-        System.out.println("Trung bình thành tiền háo đơn trong 09/2013 là: "+ sum / dem);
+        System.out.println(" Trung bình trong tháng 9/2013: "+ ((sum+sum1)/dem));
 
     }
 
