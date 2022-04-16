@@ -302,6 +302,9 @@ public class QuanLy {
                 if(((SinhVien) e).checkKhenThuong() && !this.lsvKT.contains(((SinhVien) e))){ // sua
                     lsvKT.add((SinhVien) e);
                 }
+                if(!((SinhVien) e).checkKhenThuong() && this.lsvKT.contains(((SinhVien) e))){
+                    this.lsvKT.remove(((SinhVien) e));
+                }
             }
         }
     }
@@ -394,13 +397,16 @@ public class QuanLy {
             }
 
         } while (chonSua!=0);
-        this.lgvKT.clear();
         for(Nguoi e:listNguoi){
             if(e instanceof GiangVien){
-                if(((GiangVien) e).checkKhenThuong()){
+                if(((GiangVien) e).checkKhenThuong() && !this.lgvKT.contains(((GiangVien) e))){ // sua
                     this.lgvKT.add((GiangVien) e);
                 }
+                if(!((GiangVien) e).checkKhenThuong() && this.lgvKT.contains(((GiangVien) e))){
+                    this.lgvKT.remove(((GiangVien) e));
+                }
             }
+
         }
 
     }
@@ -442,10 +448,9 @@ public class QuanLy {
         FileOutputStream fout= new FileOutputStream(f);
         ObjectOutputStream objout = new ObjectOutputStream(fout);
         int choice;
-        do {
+
             System.out.println("---Menu---\n"+"1.Lưu thông tin toàn bộ giảng viên sinh viên\n"+"2.Lưu thông tin giảng viên được khen thưởng\n" +
-                    "3.Lưu thông tin sinh viên được khen thưởng\n" +
-                    "0.Exit");
+                    "3.Lưu thông tin sinh viên được khen thưởng\n" );
             System.out.println("Nhập lựa chọn của bạn để lưu file : ");
             choice = new Scanner(System.in).nextInt();
             switch(choice){
@@ -467,65 +472,60 @@ public class QuanLy {
                     fout.close();
                     System.out.println("Lưu thành công ");
                     break;
-                case 0:
-                    System.out.println("Cảm ơn bạn đã nhập (file đã nhập "+path+" )");
+
                 default:
                     System.out.println("Lưa chọn không có trong menu");
             }
-        } while (choice !=0);
+
     }
 
     public void docFile(String path) throws FileNotFoundException, IOException, ClassNotFoundException{
         File f = new File(path);
         FileInputStream fin = new FileInputStream(f);
         ObjectInputStream objin = new ObjectInputStream(fin);
-        int choice;
-        do {
-            System.out.println("---Menu---\n"+"1.Đọc thông tin toàn bộ giảng viên sinh viên\n"+"2.Đọc thông tin giảng viên được khen thưởng\n" +
-                    "3.Đọc thông tin sinh viên được khen thưởng\n" +
-                    "0.Exit");
-            System.out.println("Nhập vào kiểu file "+path +" đã lưu để đọc: ");
-            choice =new Scanner(System.in).nextInt();
-            switch (choice){
-                case 1:
-                    listNguoi = new ArrayList<Nguoi>();
-                    listNguoi = (ArrayList)objin.readObject();
-                    objin.close();
-                    fin.close();
-                    if(!listNguoi.isEmpty())
-                        listNguoi.forEach(e-> System.out.println(e.toString()));
-                    else
-                        System.out.println(path + " trống");
-                    System.out.println("Đọc thành công");
-                    break;
-                case 2:
-                    lgvKT = new ArrayList<>();
-                    lgvKT = (ArrayList)objin.readObject();
-                    objin.close();
-                    fin.close();
-                    if(!lgvKT.isEmpty())
-                        lgvKT.forEach(e-> System.out.println(e.toString()));
-                    else
-                        System.out.println(path +" trống");
-                    System.out.println("Đọc thành công");
+            int choice;
+                System.out.println("---Menu---\n"+"1.Đọc thông tin toàn bộ giảng viên sinh viên\n"+"2.Đọc thông tin giảng viên được khen thưởng\n" +
+                        "3.Đọc thông tin sinh viên được khen thưởng\n" );
+                System.out.println("Nhập vào kiểu file "+path +" đã lưu để đọc: ");
+                choice =new Scanner(System.in).nextInt();
+                switch (choice){
+                    case 1:
+                        listNguoi = new ArrayList<Nguoi>();
+                        listNguoi = (ArrayList)objin.readObject();
+                        objin.close();
+                        fin.close();
+                        if(!listNguoi.isEmpty())
+                            listNguoi.forEach(e-> System.out.println(e.toString()));
+                        else
+                            System.out.println(path + " trống");
+                        System.out.println("Đọc thành công");
+                        break;
+                    case 2:
+                        lgvKT = new ArrayList<GiangVien>();
+                        lgvKT = (ArrayList)objin.readObject();
+                        objin.close();
+                        fin.close();
+                        if(!lgvKT.isEmpty())
+                            lgvKT.forEach(e-> System.out.println(e.toString()));
+                        else
+                            System.out.println(path +" trống");
+                        System.out.println("Đọc thành công");
 
-                    break;
-                case 3:
-                    lsvKT = new ArrayList<>();
-                    lsvKT = (ArrayList)objin.readObject();
-                    objin.close();
-                    fin.close();
-                    if(!lsvKT.isEmpty())
-                        lsvKT.forEach(e-> System.out.println(e.toString()));
-                    else
-                        System.out.println(path +" trống");
-                    System.out.println("Đọc thành công");
-                    break;
-                case 0:
-                    System.out.println("Cảm ơn bạn đã nhâp");
-                default:
-                    System.out.println("Không có trong menu");
-            }
-        } while (choice !=0);
+                        break;
+                    case 3:
+                        lsvKT = new ArrayList<SinhVien>();
+                        lsvKT = (ArrayList)objin.readObject();
+                        objin.close();
+                        fin.close();
+                        if(!lsvKT.isEmpty())
+                            lsvKT.forEach(e-> System.out.println(e.toString()));
+                        else
+                            System.out.println(path +" trống");
+                        System.out.println("Đọc thành công");
+                        break;
+                    default:
+                        System.out.println("Không có trong menu");
+                }
+
     }
 }

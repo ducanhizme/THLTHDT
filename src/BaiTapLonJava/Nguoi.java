@@ -84,7 +84,7 @@ public class Nguoi implements Serializable {
         this.diaChi = new Scanner(System.in).nextLine();
         System.out.println("Nhập vào tuổi:  ");
         this.tuoi= new Scanner(System.in).nextInt();
-        System.out.println("Nhập vào giới tính(1:Nam/2:Nữ");
+        System.out.println("Nhập vào giới tính(1:Nam/2:Nữ) : ");
         int gioiTinh = new Scanner(System.in).nextInt();
         if(gioiTinh == 1){
             this.gioiTinh = true;

@@ -103,8 +103,10 @@ public class main {
                     ql.luuFile(path);
                     break;
                 case 10:
-                    System.out.println("Đọc file " + path);
-                    ql.docFile(path);
+                    System.out.println("Nhập tên file bạn muốn đọc : ");
+                    String path2 = new Scanner(System.in).nextLine();
+                    System.out.println("Đọc file " + path2);
+                    ql.docFile(path2);
                     break;
                 case 0:
                     System.out.println("Cảm ơn bạn đã nhập");
