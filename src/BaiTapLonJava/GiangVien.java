@@ -90,17 +90,17 @@ public class GiangVien extends Nguoi implements KhenThuong {
         this.soLuongLopPhuTrach = new Scanner(System.in).nextInt();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        GiangVien giangVien = (GiangVien) o;
-        return soLuongCongTrinh == giangVien.soLuongCongTrinh && soLuongLopPhuTrach == giangVien.soLuongLopPhuTrach && Objects.equals(maGiaoVien, giangVien.maGiaoVien) && Objects.equals(boMonPhuTrach, giangVien.boMonPhuTrach) && Objects.equals(hocVi, giangVien.hocVi);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), maGiaoVien, boMonPhuTrach, hocVi, soLuongCongTrinh, soLuongLopPhuTrach);
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        if (!super.equals(o)) return false;
+//        GiangVien giangVien = (GiangVien) o;
+//        return soLuongCongTrinh == giangVien.soLuongCongTrinh && soLuongLopPhuTrach == giangVien.soLuongLopPhuTrach && Objects.equals(maGiaoVien, giangVien.maGiaoVien) && Objects.equals(boMonPhuTrach, giangVien.boMonPhuTrach) && Objects.equals(hocVi, giangVien.hocVi);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(super.hashCode(), maGiaoVien, boMonPhuTrach, hocVi, soLuongCongTrinh, soLuongLopPhuTrach);
+//    }
 }

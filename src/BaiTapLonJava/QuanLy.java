@@ -10,7 +10,7 @@ public class QuanLy {
     private List<SinhVien> lsvKT;
 
     public QuanLy(){
-        this.listNguoi = new ArrayList<>();
+        this.listNguoi = new ArrayList<Nguoi>();
         this.lgvKT = new ArrayList<GiangVien>();
         this.lsvKT = new ArrayList<SinhVien>();
 
@@ -297,15 +297,22 @@ public class QuanLy {
             }
 
         } while (chonSua!=0);
-        for(Nguoi e:listNguoi){
-            if(e instanceof SinhVien){
-                if(((SinhVien) e).checkKhenThuong() && !this.lsvKT.contains(((SinhVien) e))){ // sua
-                    lsvKT.add((SinhVien) e);
-                }
-                if(!((SinhVien) e).checkKhenThuong() && this.lsvKT.contains(((SinhVien) e))){
-                    this.lsvKT.remove(((SinhVien) e));
-                }
-            }
+//        for(Nguoi e:listNguoi){
+//            if(e instanceof SinhVien){
+//                if(((SinhVien) e).checkKhenThuong() && !this.lsvKT.contains(((SinhVien) e))){ // sua
+//                    lsvKT.add((SinhVien) e);
+//                }
+//                if(!((SinhVien) e).checkKhenThuong() && this.lsvKT.contains(((SinhVien) e))){
+//                    this.lsvKT.remove(((SinhVien) e));
+//                }
+//            }
+//        }
+        Nguoi e = listNguoi.get(chon);//k dung vong for, dùng luôn biến chon ở trên là vị trí của sinh viên đc sửa trong list người
+        if(((SinhVien) e).checkKhenThuong() && !this.lsvKT.contains(((SinhVien) e))){
+            lsvKT.add((SinhVien) e);
+        }
+        if(!((SinhVien) e).checkKhenThuong() && this.lsvKT.contains(((SinhVien) e))){
+            this.lsvKT.remove(((SinhVien) e));
         }
     }
 
@@ -397,16 +404,23 @@ public class QuanLy {
             }
 
         } while (chonSua!=0);
-        for(Nguoi e:listNguoi){
-            if(e instanceof GiangVien){
-                if(((GiangVien) e).checkKhenThuong() && !this.lgvKT.contains(((GiangVien) e))){ // sua
-                    this.lgvKT.add((GiangVien) e);
-                }
-                if(!((GiangVien) e).checkKhenThuong() && this.lgvKT.contains(((GiangVien) e))){
-                    this.lgvKT.remove(((GiangVien) e));
-                }
-            }
-
+//        for(Nguoi e:listNguoi){
+//            if(e instanceof GiangVien){
+//                if(((GiangVien) e).checkKhenThuong() && !this.lgvKT.contains(((GiangVien) e))){ // sua
+//                    this.lgvKT.add((GiangVien) e);
+//                }
+//                if(!((GiangVien) e).checkKhenThuong() && this.lgvKT.contains(((GiangVien) e))){
+//                    this.lgvKT.remove(((GiangVien) e));
+//                }
+//            }
+//
+//        }
+        Nguoi e = listNguoi.get(chon);
+        if(((GiangVien) e).checkKhenThuong() && !this.lgvKT.contains(((GiangVien) e))){
+            this.lgvKT.add((GiangVien) e);
+        }
+        if(!((GiangVien) e).checkKhenThuong() && this.lgvKT.contains(((GiangVien) e))){
+            this.lgvKT.remove(((GiangVien) e));
         }
 
     }
